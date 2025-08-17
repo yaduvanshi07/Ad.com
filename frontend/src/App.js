@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Services from './components/Services';
@@ -6,6 +7,7 @@ import Stats from './components/Stats';
 import DealsOffers from './components/DealsOffers';
 import CaseStudies from './components/CaseStudies';
 import Footer from './components/Footer';
+import HowToBook from './pages/HowToBook';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -134,16 +136,24 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <Header />
-      <Hero />
-      <DealsOffers deals={deals} />
-      <Services services={services} />
-      <Stats stats={stats} />
-      
-      <CaseStudies caseStudies={caseStudies} />
-      <Footer />
-    </div>
+    <Router>
+      <div className="App">
+        <Header />
+        <Routes>
+          <Route path="/" element={
+            <>
+              <Hero />
+              <DealsOffers deals={deals} />
+              <Services services={services} />
+              <Stats stats={stats} />
+              <CaseStudies caseStudies={caseStudies} />
+            </>
+          } />
+          <Route path="/how-to-book" element={<HowToBook />} />
+        </Routes>
+        <Footer />
+      </div>
+    </Router>
   );
 }
 
