@@ -25,16 +25,26 @@ const Hero = () => {
     }
   ];
 
-  const navigationTabs = [
+  const allServices = [
     { icon: "🏠", title: "Home", active: true },
-    { icon: "📰", title: "Newspaper Advertising" },
+    { icon: "🎬", title: "Cinema Advertising" },
+    { icon: "📺", title: "TV Advertising" },
+    { icon: "🛗", title: "Lift Branding" },
+    { icon: "📱", title: "Hyperlocal SMS" },
+    { icon: "📱", title: "OTT/Media Buying" },
     { icon: "💻", title: "Digital Marketing" },
+    { icon: "📢", title: "Digital PR" },
+    { icon: "🎯", title: "Programmatic Ads" },
+    { icon: "🚌", title: "Transit Media" },
+    { icon: "🏢", title: "Outdoor/DOOH" },
     { icon: "📻", title: "Radio Advertising" },
-    { icon: "🎬", title: "Cinema Advertising" }
+    { icon: "🌟", title: "Influencer Marketing" }
   ];
 
   const [current, setCurrent] = useState(0);
   const [activeTab, setActiveTab] = useState(0);
+  const [startIndex, setStartIndex] = useState(0);
+  const visibleTabs = 6; // Number of tabs visible at once
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -45,6 +55,27 @@ const Hero = () => {
 
   const goPrev = () => setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
   const goNext = () => setCurrent((prev) => (prev + 1) % slides.length);
+
+  const navigateTabsLeft = () => {
+    setStartIndex((prev) => Math.max(0, prev - 1));
+  };
+
+  const navigateTabsRight = () => {
+    setStartIndex((prev) => Math.min(allServices.length - visibleTabs, prev + 1));
+  };
+
+  const handleTabClick = (index) => {
+    const actualIndex = startIndex + index;
+    setActiveTab(actualIndex);
+    
+    // Navigate to the service page if it's not Home
+    if (actualIndex > 0) {
+      // You can add navigation logic here
+      console.log(`Navigating to: ${allServices[actualIndex].title}`);
+    }
+  };
+
+  const visibleServices = allServices.slice(startIndex, startIndex + visibleTabs);
 
   return (
     <div style={{ 
@@ -66,52 +97,112 @@ const Hero = () => {
         {/* Navigation Tabs */}
         <div style={{
           display: "flex",
-          background: "#333"
+          background: "#333",
+          alignItems: "center"
         }}>
-          {/* Left Arrow for Navigation */}
-          <div style={{
-            background: "rgba(255, 192, 203, 0.8)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            width: "50px",
-            cursor: "pointer"
-          }}>
-            <span style={{ color: "white", fontSize: "16px" }}>❮</span>
+          {/* Left Arrow for Navigation Tabs */}
+          <div 
+            onClick={navigateTabsLeft}
+            style={{
+              background: "#E53E3E",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "50px",
+              height: "60px",
+              cursor: startIndex === 0 ? "not-allowed" : "pointer",
+              opacity: startIndex === 0 ? 0.5 : 1,
+              transition: "all 0.3s ease"
+            }}
+          >
+            <span style={{ color: "white", fontSize: "18px", fontWeight: "bold" }}>❮</span>
           </div>
 
-          {navigationTabs.map((tab, index) => (
-            <div
-              key={index}
-              onClick={() => setActiveTab(index)}
-              style={{
-                flex: "1",
-                padding: "15px 20px",
-                background: index === activeTab ? "white" : "#333",
-                color: index === activeTab ? "#333" : "white",
-                textAlign: "center",
-                cursor: "pointer",
-                fontSize: "14px",
-                fontWeight: "500",
-                transition: "all 0.3s ease",
-                borderBottom: index === activeTab ? "3px solid #4472C4" : "none"
-              }}
-            >
-              <span style={{ marginRight: "8px" }}>{tab.icon}</span>
-              {tab.title}
-            </div>
-          ))}
-
-          {/* Right Arrow for Navigation */}
+          {/* Service Tabs */}
           <div style={{
-            background: "#E53E3E",
             display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            width: "50px",
-            cursor: "pointer"
+            flex: "1",
+            overflow: "hidden",
+            transition: "all 0.4s ease-in-out"
           }}>
-            <span style={{ color: "white", fontSize: "16px" }}>❯</span>
+            {visibleServices.map((tab, index) => (
+              <div
+                key={startIndex + index}
+                onClick={() => handleTabClick(index)}
+                style={{
+                  flex: "1",
+                  padding: "15px 12px",
+                  background: (startIndex + index) === activeTab ? "white" : "#333",
+                  color: (startIndex + index) === activeTab ? "#333" : "white",
+                  textAlign: "center",
+                  cursor: "pointer",
+                  fontSize: "13px",
+                  fontWeight: "600",
+                  transition: "all 0.3s ease",
+                  borderBottom: (startIndex + index) === activeTab ? "3px solid #4472C4" : "none",
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  minWidth: "0",
+                  position: "relative",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "8px"
+                }}
+                onMouseEnter={(e) => {
+                  if ((startIndex + index) !== activeTab) {
+                    e.target.style.background = "#444";
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if ((startIndex + index) !== activeTab) {
+                    e.target.style.background = "#333";
+                  }
+                }}
+              >
+                <span style={{ fontSize: "16px" }}>{tab.icon}</span>
+                <span style={{
+                  fontSize: "12px",
+                  lineHeight: "1.2",
+                  fontWeight: "600"
+                }}>
+                  {tab.title}
+                </span>
+                {/* Dropdown indicator for Home tab */}
+                {(startIndex + index) === 0 && (startIndex + index) === activeTab && (
+                  <div style={{
+                    position: "absolute",
+                    bottom: "5px",
+                    left: "50%",
+                    transform: "translateX(-50%)",
+                    width: "0",
+                    height: "0",
+                    borderLeft: "4px solid transparent",
+                    borderRight: "4px solid transparent",
+                    borderTop: "6px solid #333"
+                  }}></div>
+                )}
+              </div>
+            ))}
+          </div>
+
+          {/* Right Arrow for Navigation Tabs */}
+          <div 
+            onClick={navigateTabsRight}
+            style={{
+              background: "#E53E3E",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "50px",
+              height: "60px",
+              cursor: startIndex >= allServices.length - visibleTabs ? "not-allowed" : "pointer",
+              opacity: startIndex >= allServices.length - visibleTabs ? 0.5 : 1,
+              transition: "all 0.3s ease"
+            }}
+          >
+            <span style={{ color: "white", fontSize: "18px", fontWeight: "bold" }}>❯</span>
           </div>
         </div>
 

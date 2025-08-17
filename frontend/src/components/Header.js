@@ -1,7 +1,34 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const services = [
+    {
+      column1: [
+        "Newspaper Advertising",
+        "Cinema Advertising",
+        "TV Advertising",
+        "Lift Branding",
+        "Hyperlocal SMS"
+      ],
+      column2: [
+        "OTT/Media Buying",
+        "Digital Marketing",
+        "Digital PR",
+        "Programmatic Ads"
+      ],
+      column3: [
+        "Transit Media",
+        "Outdoor/DOOH",
+        "Radio Advertising",
+        "Influencer Marketing"
+      ]
+    }
+  ];
 
   return (
     <>
@@ -10,7 +37,8 @@ const Header = () => {
         background: "linear-gradient(135deg, #2E5BBA 0%, #add8e6 100%)",
         color: "white",
         padding: "8px 0",
-        fontFamily: "Arial, sans-serif"
+        fontFamily: "Arial, sans-serif",
+        position: "relative"
       }}>
         <div style={{
           maxWidth: "1200px",
@@ -21,7 +49,59 @@ const Header = () => {
           alignItems: "center"
         }}>
           {/* Logo */}
-          <div style={{ display: "flex", alignItems: "center" }}>
+          <div 
+            style={{ 
+              display: "flex", 
+              alignItems: "center",
+              cursor: "pointer",
+              gap: "15px"
+            }}
+            onClick={() => navigate('/')}
+            onMouseEnter={(e) => e.target.style.opacity = "0.8"}
+            onMouseLeave={(e) => e.target.style.opacity = "1"}
+          >
+            {/* Company Logo */}
+            <div style={{
+              width: "60px",
+              height: "60px",
+              borderRadius: "8px",
+              overflow: "hidden",
+              boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+              backgroundColor: "white",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center"
+            }}>
+              <img 
+                src="/logos/company-logo.png" 
+                alt="VipLav Advertising Logo"
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "contain",
+                  padding: "8px"
+                }}
+                onError={(e) => {
+                  // Fallback if logo fails to load
+                  e.target.style.display = "none";
+                  e.target.nextSibling.style.display = "flex";
+                }}
+              />
+              {/* Fallback icon if logo doesn't load */}
+              <div style={{
+                display: "none",
+                width: "100%",
+                height: "100%",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: "24px",
+                color: "#4472C4",
+                fontWeight: "bold"
+              }}>
+                🎯
+              </div>
+            </div>
+
             <div style={{
               backgroundColor: "#4472C4",
               color: "white",
@@ -45,9 +125,185 @@ const Header = () => {
 
           {/* Navigation Links */}
           <div style={{ display: "flex", gap: "25px", fontSize: "17px", alignItems: "center" }}>
-            <div style={{ cursor: "pointer", transition: "color 0.3s ease" }}>Services ▼</div>
+            <div 
+              style={{ 
+                cursor: "pointer", 
+                transition: "color 0.3s ease",
+                position: "relative"
+              }}
+              onClick={() => setIsServicesOpen(!isServicesOpen)}
+              onMouseEnter={() => setIsServicesOpen(true)}
+              onMouseLeave={() => setIsServicesOpen(false)}
+            >
+              Services ▼
+              
+              {/* Services Dropdown */}
+              {isServicesOpen && (
+                <div style={{
+                  position: "absolute",
+                  top: "100%",
+                  left: "-350px",
+                  backgroundColor: "white",
+                  color: "#333",
+                  borderRadius: "8px",
+                  boxShadow: "0 10px 30px rgba(0,0,0,0.2)",
+                  padding: "15px",
+                  minWidth: "900px",
+                  zIndex: 1000,
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "15px"
+                }}>
+                  {/* Main Header */}
+                  <div style={{
+                    textAlign: "center",
+                    borderBottom: "3px solid #2E5BBA",
+                    paddingBottom: "10px",
+                    marginBottom: "15px"
+                  }}>
+                    <h2 style={{
+                      margin: "0",
+                      color: "#2E5BBA",
+                      fontSize: "22px",
+                      fontWeight: "bold"
+                    }}>
+                      Our Services
+                    </h2>
+                  </div>
+
+                  {/* Services Columns */}
+                  <div style={{
+                    display: "flex",
+                    gap: "50px"
+                  }}>
+                    {/* Column 1 */}
+                    <div style={{ flex: 1 }}>
+                      <h4 style={{ 
+                        margin: "0 0 10px 0", 
+                        color: "#2E5BBA", 
+                        fontSize: "15px",
+                        fontWeight: "bold",
+                        borderBottom: "2px solid #2E5BBA",
+                        paddingBottom: "3px"
+                      }}>
+                        Traditional Media
+                      </h4>
+                      {services[0].column1.map((service, index) => (
+                        <div 
+                          key={index}
+                          style={{
+                            padding: "5px 0",
+                            cursor: "pointer",
+                            transition: "color 0.3s ease",
+                            fontSize: "13px",
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "8px"
+                          }}
+                          onMouseEnter={(e) => e.target.style.color = "#2E5BBA"}
+                          onMouseLeave={(e) => e.target.style.color = "#333"}
+                        >
+                          <span style={{ fontSize: "16px" }}>
+                            {index === 0 ? "📰" : 
+                             index === 1 ? "🎬" : 
+                             index === 2 ? "📺" : 
+                             index === 3 ? "🛗" : "📱"}
+                          </span>
+                          {service}
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Column 2 */}
+                    <div style={{ flex: 1 }}>
+                      <h4 style={{ 
+                        margin: "0 0 10px 0", 
+                        color: "#2E5BBA", 
+                        fontSize: "15px",
+                        fontWeight: "bold",
+                        borderBottom: "2px solid #2E5BBA",
+                        paddingBottom: "3px"
+                      }}>
+                        Digital Solutions
+                      </h4>
+                      {services[0].column2.map((service, index) => (
+                        <div 
+                          key={index}
+                          style={{
+                            padding: "5px 0",
+                            cursor: "pointer",
+                            transition: "color 0.3s ease",
+                            fontSize: "13px",
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "8px"
+                          }}
+                          onMouseEnter={(e) => e.target.style.color = "#2E5BBA"}
+                          onMouseLeave={(e) => e.target.style.color = "#333"}
+                        >
+                          <span style={{ fontSize: "16px" }}>
+                            {index === 0 ? "📱" : 
+                             index === 1 ? "💻" : 
+                             index === 2 ? "📢" : "🎯"}
+                          </span>
+                          {service}
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Column 3 */}
+                    <div style={{ flex: 1 }}>
+                      <h4 style={{ 
+                        margin: "0 0 10px 0", 
+                        color: "#2E5BBA", 
+                        fontSize: "15px",
+                        fontWeight: "bold",
+                        borderBottom: "2px solid #2E5BBA",
+                        paddingBottom: "3px"
+                      }}>
+                        Outdoor & Transit
+                      </h4>
+                      {services[0].column3.map((service, index) => (
+                        <div 
+                          key={index}
+                          style={{
+                            padding: "5px 0",
+                            cursor: "pointer",
+                            transition: "color 0.3s ease",
+                            fontSize: "13px",
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "8px"
+                          }}
+                          onMouseEnter={(e) => e.target.style.color = "#2E5BBA"}
+                          onMouseLeave={(e) => e.target.style.color = "#333"}
+                        >
+                          <span style={{ fontSize: "16px" }}>
+                            {index === 0 ? "🚌" : 
+                             index === 1 ? "🏢" : 
+                             index === 2 ? "📻" : "🌟"}
+                          </span>
+                          {service}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
             <div style={{ cursor: "pointer", transition: "color 0.3s ease" }}>Blog</div>
-            <div style={{ cursor: "pointer", transition: "color 0.3s ease" }}>How to book</div>
+            <div 
+              style={{ 
+                cursor: "pointer", 
+                transition: "color 0.3s ease",
+                fontWeight: "bold"
+              }}
+              onClick={() => navigate('/how-to-book')}
+              onMouseEnter={(e) => e.target.style.color = "#FFD700"}
+              onMouseLeave={(e) => e.target.style.color = "white"}
+            >
+              How to book
+            </div>
             <div style={{ cursor: "pointer", transition: "color 0.3s ease" }}>Login</div>
             <div style={{ cursor: "pointer", transition: "color 0.3s ease" }}>🛒 Cart (0)</div>
             <div style={{
