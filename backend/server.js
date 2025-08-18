@@ -1,4 +1,4 @@
-// server.js - Main server file for BookMyAd API
+// server.js - Main server file for VipLav Advertising Co. API
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
@@ -30,7 +30,7 @@ app.use(morgan('combined'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Sample data for the BookMyAd website
+// Sample data for the VipLav Advertising Co. website
 const servicesData = [
   {
     id: 1,
@@ -236,7 +236,7 @@ const caseStudiesData = [
       engagement: "15% CTR"
     },
     image: "/api/placeholder/300/200",
-    testimonial: "BookMyAd delivered exceptional results for our sustainability campaign."
+            testimonial: "VipLav Advertising Co. delivered exceptional results for our sustainability campaign."
   },
   {
     id: 2,
@@ -310,7 +310,7 @@ const testimonialsData = [
     name: "Rajesh Sharma",
     company: "Tech Startup",
     designation: "Marketing Head",
-    message: "BookMyAd transformed our advertising strategy. The results exceeded our expectations!",
+            message: "VipLav Advertising Co. transformed our advertising strategy. The results exceeded our expectations!",
     rating: 5,
     image: "/api/placeholder/100/100"
   },
@@ -339,7 +339,7 @@ const blogData = [
     id: 1,
     title: "The Future of Newspaper Advertising in Digital Age",
     excerpt: "Despite digital transformation, newspaper advertising remains a powerful medium...",
-    author: "BookMyAd Team",
+            author: "VipLav Advertising Co. Team",
     date: "2024-08-10",
     category: "Advertising Trends",
     image: "/api/placeholder/400/250",
@@ -927,7 +927,7 @@ app.get('/api/health', (req, res) => {
     timestamp: new Date().toISOString(),
     uptime: process.uptime(),
     memory: process.memoryUsage(),
-    service: 'BookMyAd API'
+    service: 'VipLav Advertising Co. API'
   });
 });
 
@@ -936,14 +936,14 @@ app.get('/health', (req, res) => {
   res.json({ 
     status: 'OK', 
     timestamp: new Date().toISOString(),
-    service: 'BookMyAd API'
+    service: 'VipLav Advertising Co. API'
   });
 });
 
 // Root endpoint
 app.get('/api', (req, res) => {
   res.json({ 
-    message: 'BookMyAd Backend API Server',
+    message: 'VipLav Advertising Co. Backend API Server',
     version: '2.1.0',
     endpoints: {
       // Main API endpoints
@@ -974,7 +974,7 @@ app.get('/api', (req, res) => {
 // Legacy root endpoint
 app.get('/', (req, res) => {
   res.json({ 
-    message: 'BookMyAd Backend API is running!',
+    message: 'VipLav Advertising Co. Backend API is running!',
     version: '2.1.0',
     redirectTo: '/api'
   });

@@ -40,7 +40,7 @@ const Footer = () => {
         <div className="footer-content">
           <div className="footer-section">
             <div className="footer-logo">
-              <h3>BookMyAd</h3>
+              <h3>VipLav Advertising Co.</h3>
               <p>Your trusted partner for all advertising needs. We provide 360-degree solutions for businesses of all sizes.</p>
             </div>
           </div>
@@ -105,9 +105,9 @@ const Footer = () => {
 
         <div className="footer-bottom">
           <div className="footer-bottom-content">
-            <p>&copy; 2025 BookMyAd. All rights reserved.</p>
+            <p>&copy; 2025 VipLav Advertising Co. All rights reserved.</p>
             <div className="footer-contact-info">
-              <span>📧 info@bookmyad.com</span>
+              <span>📧 info@viplavadvertising.com</span>
               <span>📞 +91-11-4567-8900</span>
             </div>
           </div>

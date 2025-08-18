@@ -32,14 +32,14 @@ const Header = () => {
 
   return (
     <>
-      {/* Main Header */}
-      <div style={{
-        background: "linear-gradient(135deg, #2E5BBA 0%, #add8e6 100%)",
-        color: "white",
-        padding: "8px 0",
-        fontFamily: "Arial, sans-serif",
-        position: "relative"
-      }}>
+             {/* Main Header */}
+       <div style={{
+         background: "linear-gradient(135deg, #34495e 0%, #2c3e50 100%)",
+         color: "white",
+         padding: "4px 0",
+         fontFamily: "'Poppins', 'Montserrat', sans-serif",
+         position: "relative"
+       }}>
         <div style={{
           maxWidth: "1200px",
           margin: "0 auto",
@@ -60,26 +60,22 @@ const Header = () => {
             onMouseEnter={(e) => e.target.style.opacity = "0.8"}
             onMouseLeave={(e) => e.target.style.opacity = "1"}
           >
-            {/* Company Logo */}
-            <div style={{
-              width: "60px",
-              height: "60px",
-              borderRadius: "8px",
-              overflow: "hidden",
-              boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
-              backgroundColor: "white",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center"
-            }}>
+                         {/* Company Logo - Completely transparent */}
+             <div style={{
+               width: "70px",
+               height: "70px",
+               backgroundColor: "transparent",
+               display: "flex",
+               alignItems: "center",
+               justifyContent: "center"
+             }}>
               <img 
                 src="/logos/company-logo.png" 
                 alt="VipLav Advertising Logo"
                 style={{
                   width: "100%",
                   height: "100%",
-                  objectFit: "contain",
-                  padding: "8px"
+                  objectFit: "contain"
                 }}
                 onError={(e) => {
                   // Fallback if logo fails to load
@@ -102,24 +98,35 @@ const Header = () => {
               </div>
             </div>
 
-            <div style={{
-              backgroundColor: "#4472C4",
-              color: "white",
-              padding: "10px 10px",
-              borderRadius: "4px",
-              fontWeight: "bold",
-              fontSize: "10px"
-            }}>
+                         {/* Brand Name - Now transparent background */}
+             <div style={{
+               backgroundColor: "transparent",
+               color: "white",
+               padding: "6px 8px",
+               borderRadius: "4px",
+               fontWeight: "bold",
+               fontSize: "10px"
+             }}>
               
               <span style={{
-                // backgroundColor: "white",
                 color: "orange",
-                // padding: "0px 0px",
                 borderRadius: "2px",
                 marginLeft: "4px",
-                fontSize: "35px"
-              }}>VIPLAV </span>
-              <span style={{ fontSize: "25px", display: "block", marginTop:"-10px" }}>ADVERTISING COMPANY</span>
+                fontSize: "35px",
+                fontFamily: "'Montserrat', 'Poppins', sans-serif",
+                fontWeight: "800",
+                textShadow: "2px 2px 4px rgba(0,0,0,0.3)",
+                letterSpacing: "2px"
+              }}>VIPLAV</span>
+              <span style={{ 
+                fontSize: "25px", 
+                display: "block", 
+                marginTop:"-10px",
+                fontFamily: "'Poppins', 'Montserrat', sans-serif",
+                fontWeight: "600",
+                letterSpacing: "1px",
+                textShadow: "1px 1px 3px rgba(0,0,0,0.3)"
+              }}>ADVERTISING CO.</span>
             </div>
           </div>
 

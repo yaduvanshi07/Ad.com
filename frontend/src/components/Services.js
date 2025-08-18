@@ -123,7 +123,7 @@ const Services = ({ services }) => {
           color: 'white'
         }}>
           <h3 style={{ marginBottom: '20px', fontSize: '1.8rem' }}>
-            Why Choose BookMyAd?
+            Why Choose VipLav Advertising Co.?
           </h3>
           <div style={{ 
             display: 'grid', 

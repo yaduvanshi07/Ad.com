@@ -77,12 +77,12 @@ const Hero = ({ navigateToPage }) => {
   const visibleServices = allServices.slice(startIndex, startIndex + visibleTabs);
 
   return (
-    <div style={{ 
-      background: "linear-gradient(135deg, #2E5BBA 0%, #add8e6 100%)",
-      fontFamily: "Arial, sans-serif",
-      padding: "20px",
-      minHeight: "600px"
-    }}>
+         <div style={{ 
+       background: "linear-gradient(135deg, #34495e 0%, #2c3e50 100%)",
+       fontFamily: "Arial, sans-serif",
+       padding: "20px",
+       minHeight: "600px"
+     }}>
       {/* Container with border radius */}
       <div style={{
         maxWidth: "1200px",

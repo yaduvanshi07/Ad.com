@@ -49,7 +49,7 @@ const BooksOffers = () => {
         <div style={styles.container}>
           <h2 style={styles.mediaTitle}>What Media are you looking for?</h2>
           <p style={styles.mediaSubtitle}>
-            The right place for your business: BookMyAd provides 360-degree solutions. Book the best advertising options for you online here:
+            The right place for your business: VipLav Advertising Co. provides 360-degree solutions. Book the best advertising options for you online here:
           </p>
           
           <div style={styles.mediaGrid}>

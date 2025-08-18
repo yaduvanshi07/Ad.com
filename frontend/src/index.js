@@ -230,7 +230,7 @@ class ErrorBoundary extends React.Component {
         <div className="error-boundary">
           <h2>🚨 Something went wrong</h2>
           <p>
-            We're sorry! There was an error loading the BookMyAd application.
+            We're sorry! There was an error loading the VipLav Advertising Co. application.
           </p>
           <button 
             onClick={() => window.location.reload()}
