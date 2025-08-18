@@ -8,13 +8,21 @@ import DealsOffers from './components/DealsOffers';
 import CaseStudies from './components/CaseStudies';
 import Footer from './components/Footer';
 import HowToBook from './pages/HowToBook';
+import NewspaperAdvertising from './components/NewspaperAdvertising';
 
-function App() {
+// Main App Component with Routing
+const App = () => {
   const [loading, setLoading] = useState(true);
   const [services, setServices] = useState([]);
   const [deals, setDeals] = useState([]);
   const [stats, setStats] = useState({});
   const [caseStudies, setCaseStudies] = useState([]);
+  const [currentPage, setCurrentPage] = useState('home');
+  
+  const navigateToPage = (page) => {
+    setCurrentPage(page);
+    window.scrollTo(0, 0);
+  };
 
   useEffect(() => {
     // Simulate loading and fetch data
@@ -137,16 +145,66 @@ function App() {
 
   return (
     <Router>
-      <div className="App">
+      <div className="App" style={{ minHeight: "100vh", backgroundColor: "#f9fafb" }}>
         <Header />
         <Routes>
           <Route path="/" element={
             <>
-              <Hero />
-              <DealsOffers deals={deals} />
-              <Services services={services} />
-              <Stats stats={stats} />
-              <CaseStudies caseStudies={caseStudies} />
+              {currentPage === 'home' && (
+                <>
+                  <Hero navigateToPage={navigateToPage} />
+                  <DealsOffers deals={deals} />
+                  <Services services={services} />
+                  <Stats stats={stats} />
+                  <CaseStudies caseStudies={caseStudies} />
+                </>
+              )}
+              {currentPage === 'newspaper-advertising' && <NewspaperAdvertising navigateToPage={navigateToPage} />}
+              
+              {/* Coming Soon Pages */}
+              {currentPage !== 'home' && currentPage !== 'newspaper-advertising' && (
+                <div style={{
+                  minHeight: "100vh",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  background: "linear-gradient(135deg, #2E5BBA 0%, #add8e6 100%)"
+                }}>
+                  <div style={{
+                    backgroundColor: "white",
+                    padding: "40px",
+                    borderRadius: "15px",
+                    boxShadow: "0 10px 30px rgba(0, 0, 0, 0.2)",
+                    textAlign: "center",
+                    maxWidth: "500px"
+                  }}>
+                    <h2 style={{ color: "#333", marginBottom: "20px" }}>
+                      {currentPage.replace('-', ' ').toUpperCase()} Coming Soon!
+                    </h2>
+                    <p style={{ color: "#666", marginBottom: "30px" }}>
+                      This feature is under development. Please check back later.
+                    </p>
+                    <button 
+                      onClick={() => navigateToPage('home')}
+                      style={{
+                        backgroundColor: "#4472C4",
+                        color: "white",
+                        padding: "12px 30px",
+                        border: "none",
+                        borderRadius: "8px",
+                        cursor: "pointer",
+                        fontWeight: "bold",
+                        fontSize: "16px",
+                        transition: "background-color 0.3s ease"
+                      }}
+                      onMouseOver={(e) => e.target.style.backgroundColor = "#3a5ba0"}
+                      onMouseOut={(e) => e.target.style.backgroundColor = "#4472C4"}
+                    >
+                      Back to Home
+                    </button>
+                  </div>
+                </div>
+              )}
             </>
           } />
           <Route path="/how-to-book" element={<HowToBook />} />
@@ -155,6 +213,6 @@ function App() {
       </div>
     </Router>
   );
-}
+};
 
 export default App;

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const Hero = () => {
+const Hero = ({ navigateToPage }) => {
   const slides = [
     {
       title: "Easiest and Fastest ad booking",
@@ -26,25 +26,25 @@ const Hero = () => {
   ];
 
   const allServices = [
-    { icon: "🏠", title: "Home", active: true },
-    { icon: "🎬", title: "Cinema Advertising" },
-    { icon: "📺", title: "TV Advertising" },
-    { icon: "🛗", title: "Lift Branding" },
-    { icon: "📱", title: "Hyperlocal SMS" },
-    { icon: "📱", title: "OTT/Media Buying" },
-    { icon: "💻", title: "Digital Marketing" },
-    { icon: "📢", title: "Digital PR" },
-    { icon: "🎯", title: "Programmatic Ads" },
-    { icon: "🚌", title: "Transit Media" },
-    { icon: "🏢", title: "Outdoor/DOOH" },
-    { icon: "📻", title: "Radio Advertising" },
-    { icon: "🌟", title: "Influencer Marketing" }
+    { icon: "🏠", title: "Home", page: "home" },
+    { icon: "📰", title: "Newspaper Advertising", page: "newspaper-advertising" },
+    { icon: "📺", title: "TV Advertising", page: "tv-advertising" },
+    { icon: "🛗", title: "Lift Branding", page: "lift-branding" },
+    { icon: "📱", title: "Hyperlocal SMS", page: "hyperlocal-sms" },
+    { icon: "📱", title: "OTT/Media Buying", page: "ott-media" },
+    { icon: "💻", title: "Digital Marketing", page: "digital-marketing" },
+    { icon: "📢", title: "Digital PR", page: "digital-pr" },
+    { icon: "🎯", title: "Programmatic Ads", page: "programmatic-ads" },
+    { icon: "🚌", title: "Transit Media", page: "transit-media" },
+    { icon: "🏢", title: "Outdoor/DOOH", page: "outdoor-dooh" },
+    { icon: "📻", title: "Radio Advertising", page: "radio-advertising" },
+    { icon: "🌟", title: "Influencer Marketing", page: "influencer-marketing" }
   ];
 
   const [current, setCurrent] = useState(0);
   const [activeTab, setActiveTab] = useState(0);
   const [startIndex, setStartIndex] = useState(0);
-  const visibleTabs = 6; // Number of tabs visible at once
+  const visibleTabs = 6;
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -67,11 +67,10 @@ const Hero = () => {
   const handleTabClick = (index) => {
     const actualIndex = startIndex + index;
     setActiveTab(actualIndex);
+    const service = allServices[actualIndex];
     
-    // Navigate to the service page if it's not Home
-    if (actualIndex > 0) {
-      // You can add navigation logic here
-      console.log(`Navigating to: ${allServices[actualIndex].title}`);
+    if (service.page !== 'home') {
+      navigateToPage(service.page);
     }
   };
 
@@ -169,8 +168,8 @@ const Hero = () => {
                 }}>
                   {tab.title}
                 </span>
-                {/* Dropdown indicator for Home tab */}
-                {(startIndex + index) === 0 && (startIndex + index) === activeTab && (
+                {/* Dropdown indicator for active tab */}
+                {(startIndex + index) === activeTab && (
                   <div style={{
                     position: "absolute",
                     bottom: "5px",
@@ -279,25 +278,28 @@ const Hero = () => {
                   {slide.description}
                 </p>
 
-                <button style={{
-                  background: "#666",
-                  color: "white",
-                  padding: "12px 25px",
-                  fontSize: "14px",
-                  fontWeight: "bold",
-                  border: "none",
-                  borderRadius: "4px",
-                  cursor: "pointer",
-                  textTransform: "uppercase",
-                  letterSpacing: "0.5px",
-                  transition: "all 0.3s ease"
-                }}
-                onMouseOver={(e) => {
-                  e.target.style.background = "#555";
-                }}
-                onMouseOut={(e) => {
-                  e.target.style.background = "#666";
-                }}>
+                <button 
+                  onClick={() => navigateToPage('newspaper-advertising')}
+                  style={{
+                    background: "#666",
+                    color: "white",
+                    padding: "12px 25px",
+                    fontSize: "14px",
+                    fontWeight: "bold",
+                    border: "none",
+                    borderRadius: "4px",
+                    cursor: "pointer",
+                    textTransform: "uppercase",
+                    letterSpacing: "0.5px",
+                    transition: "all 0.3s ease"
+                  }}
+                  onMouseOver={(e) => {
+                    e.target.style.background = "#555";
+                  }}
+                  onMouseOut={(e) => {
+                    e.target.style.background = "#666";
+                  }}
+                >
                   {slide.button}
                 </button>
               </div>
@@ -385,7 +387,9 @@ const Hero = () => {
         }}
         onMouseOut={(e) => {
           e.target.style.transform = "translateX(0)";
-        }}>📞</div>
+        }}
+        onClick={() => window.open('tel:+919876543210')}
+        >📞</div>
         <div style={{
           backgroundColor: "#25D366",
           color: "white", 
@@ -401,7 +405,9 @@ const Hero = () => {
         }}
         onMouseOut={(e) => {
           e.target.style.transform = "translateX(0)";
-        }}>💬</div>
+        }}
+        onClick={() => window.open('https://wa.me/919876543210')}
+        >💬</div>
       </div>
     </div>
   );
