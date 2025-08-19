@@ -28,6 +28,7 @@ const Hero = ({ navigateToPage }) => {
   const allServices = [
     { icon: "🏠", title: "Home", page: "home" },
     { icon: "📰", title: "Newspaper Advertising", page: "newspaper-advertising" },
+    { icon: "🎬", title: "Cinema Advertising", page: "cinema-advertising" },
     { icon: "📺", title: "TV Advertising", page: "tv-advertising" },
     { icon: "🛗", title: "Lift Branding", page: "lift-branding" },
     { icon: "📱", title: "Hyperlocal SMS", page: "hyperlocal-sms" },

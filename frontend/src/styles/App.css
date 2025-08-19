@@ -327,6 +327,96 @@ p { margin-bottom: 1em; color: #6b7280; }
   border-color: rgba(59, 130, 246, 0.3);
 }
 
+/* Image based service cards */
+.service-card.image-card {
+  padding: 0;
+  border: none;
+}
+
+.service-image-wrapper {
+  position: relative;
+  height: 300px;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.service-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  animation: none;
+  transition: transform 0.5s ease, opacity 0.3s ease;
+}
+
+.service-card.image-card:hover .service-image {
+  transform: scale(1.05);
+  opacity: 0;
+  animation: flashOut 350ms ease forwards;
+}
+
+.service-overlay {
+  position: absolute;
+  inset: 0;
+  background: white;
+  opacity: 0;
+  transform: scale(0.98);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  padding: 1.2rem 1.2rem 88px 1.2rem; /* space for persistent footer */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow-y: auto;
+}
+
+.service-card.image-card:hover .service-overlay {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Attractive typography inside overlay */
+.service-card.image-card .service-overlay h3 {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #111827;
+  margin: 0 0 6px 0;
+}
+
+.service-card.image-card .service-overlay p {
+  color: #4b5563;
+  font-size: 0.98rem;
+  line-height: 1.6;
+  margin: 0 0 10px 0;
+}
+
+.service-card.image-card .service-overlay .service-features {
+  margin-top: 6px;
+}
+
+.service-footer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 12px;
+}
+
+/* Keep Book Now always visible with a subtle gradient for readability */
+.service-card.image-card .service-footer {
+  background: linear-gradient(180deg, transparent, rgba(0,0,0,0.35));
+}
+.service-card.image-card .service-footer .cta-button {
+  background: #3b82f6;
+}
+
+/* Flashy vanish animation for image */
+@keyframes flashOut {
+  0% { filter: brightness(1); opacity: 1; }
+  40% { filter: brightness(2); }
+  60% { filter: brightness(2); opacity: 0.5; }
+  100% { filter: brightness(1.2); opacity: 0; }
+}
+
 .service-icon {
   font-size: 3rem;
   margin-bottom: 1rem;

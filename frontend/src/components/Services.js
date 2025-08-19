@@ -24,45 +24,109 @@ const Services = ({ services }) => {
       '📰': 'fas fa-newspaper',
       '💻': 'fas fa-laptop',
       '📻': 'fas fa-broadcast-tower',
-      '🎬': 'fas fa-film'
+      '🎬': 'fas fa-film',
+      '📺': 'fas fa-tv',
+      '🌟': 'fas fa-user-friends'
     };
     return iconMap[iconName] || 'fas fa-star';
   };
+
+  // Six canonical services to show as cards
+  const defaultServices = [
+    {
+      id: 1,
+      name: 'Newspaper Advertising',
+      description: 'Front page, display and classified ads in top national and regional dailies.',
+      icon: '📰',
+      image: '/services/newspaper.jpg',
+      features: ['Front Page/FP+ options', 'Display & Classifieds', 'City-wise or Pan-India']
+    },
+    {
+      id: 2,
+      name: 'Cinema Advertising',
+      description: 'On‑screen ads and lobby placements across multiplex chains.',
+      icon: '🎬',
+      image: '/services/cinema.jpg',
+      features: ['On-screen spots', 'Lobby branding', 'Premium locations']
+    },
+    {
+      id: 3,
+      name: 'TV Advertising',
+      description: 'Prime-time and regional TV inventory tailored to your audience.',
+      icon: '📺',
+      image: '/services/tv.jpg',
+      features: ['Prime-time packages', 'Regional & national channels', 'Category targeting']
+    },
+    {
+      id: 4,
+      name: 'Radio Advertising',
+      description: 'City-wide reach with RJ mentions, sponsorships and spot ads.',
+      icon: '📻',
+      image: '/services/radio.jpg',
+      features: ['RJ mentions', 'Station sponsorships', 'High-frequency spot plans']
+    },
+    {
+      id: 5,
+      name: 'Digital Marketing',
+      description: 'Search, social, display and remarketing with measurable ROI.',
+      icon: '💻',
+      image: '/services/digital.jpg',
+      features: ['Meta & Google Ads', 'SEO & Content', 'Remarketing & funnels']
+    },
+    {
+      id: 6,
+      name: 'Influencer Marketing',
+      description: 'Creator collaborations across Instagram, YouTube and more.',
+      icon: '🌟',
+      image: '/services/influencer.jpg',
+      features: ['Curated creators', 'Script & brief support', 'Performance reporting']
+    }
+  ];
+
+  // Always show our six core services
+  const displayServices = defaultServices;
 
   return (
     <section className="services" id="services">
       <div className="container">
         <h2>Our Services</h2>
         <div className="services-grid">
-          {services.map((service) => (
+          {displayServices.map((service) => (
             <div 
               key={service.id} 
-              className="service-card"
+              className="service-card image-card"
               onClick={() => handleServiceClick(service)}
               style={{ cursor: 'pointer' }}
             >
-              <div className="service-icon">
-                <i className={getServiceIcon(service.icon)}></i>
+              <div className="service-image-wrapper">
+                <img src={service.image} alt={service.name} className="service-image" />
               </div>
-              <h3>{service.name}</h3>
-              <p>{service.description}</p>
-              
-              <ul className="service-features">
-                {service.features && service.features.map((feature, index) => (
-                  <li key={index}>{feature}</li>
-                ))}
-              </ul>
-              
-              <button 
-                className="cta-button"
-                style={{ marginTop: '20px', width: '100%' }}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleBookService(service.name);
-                }}
-              >
-                Book Now
-              </button>
+
+              <div className="service-overlay">
+                <div className="service-icon">
+                  <i className={getServiceIcon(service.icon)}></i>
+                </div>
+                <h3>{service.name}</h3>
+                <p>{service.description}</p>
+                <ul className="service-features">
+                  {service.features && service.features.map((feature, index) => (
+                    <li key={index}>{feature}</li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="service-footer">
+                <button 
+                  className="cta-button"
+                  style={{ width: '100%' }}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleBookService(service.name);
+                  }}
+                >
+                  Book Now
+                </button>
+              </div>
             </div>
           ))}
         </div>

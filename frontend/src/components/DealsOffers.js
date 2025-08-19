@@ -1,279 +1,225 @@
-import React from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
-const BooksOffers = () => {
-  const mediaServices = [
+// Deals & Offers carousel (2 items per view) with 3 default offer banners
+const DealsOffers = ({ deals = [] }) => {
+  const defaultOffers = useMemo(() => ([
     {
-      title: "Newspaper Advertising",
-      actionText: "Book Now",
-      bgColor: "#e3f2fd"
+      id: 'newspaper',
+      headline: 'Make Headlines with Your Brand!',
+      subheadline: '📰 Newspaper Advertising',
+      badge: 'Ads starting at ₹1999/- | Book Now',
+      cta: 'Book Now',
+      theme: { bg: '#eaf3ff', accent: '#1d4ed8', text: '#1f2937' }
     },
     {
-      title: "Digital Marketing",
-      actionText: "Book Now",
-      bgColor: "#e3f2fd"
+      id: 'cinema',
+      headline: 'Big Screen, Bigger Impact!',
+      subheadline: '🎬 Cinema Advertising',
+      badge: 'Reach moviegoers from just ₹4999/-',
+      cta: 'Book Now',
+      theme: { bg: '#eefcf4', accent: '#10b981', text: '#1f2937' }
     },
     {
-      title: "Radio Advertising",
-      actionText: "Book Now",
-      bgColor: "#e3f2fd"
+      id: 'tv',
+      headline: 'Be Seen Across Millions of Homes!',
+      subheadline: '📺 TV Advertising',
+      badge: 'TV Ads from ₹9999/- | Limited Slots',
+      cta: 'Book Now',
+      theme: { bg: '#f3f1ff', accent: '#7c3aed', text: '#1f2937' }
     },
     {
-      title: "Influencer",
-      actionText: "Fill Query or Call 880033...",
-      bgColor: "#e3f2fd"
+      id: 'radio',
+      headline: 'Let the City Hear You!',
+      subheadline: '📻 Radio Advertising',
+      badge: 'On-air Ads from ₹2999/- | Book Now',
+      cta: 'Book Now',
+      theme: { bg: '#fdf3e7', accent: '#e53935', text: '#1f2937' }
+    },
+    {
+      id: 'transit',
+      headline: 'Move Your Brand Everywhere!',
+      subheadline: '🚌 Transit Media',
+      badge: 'Bus & Metro Ads from ₹4999/-',
+      cta: 'Book Now',
+      theme: { bg: '#fff7ed', accent: '#f59e0b', text: '#1f2937' }
+    },
+    {
+      id: 'digital',
+      headline: 'Dominate the Digital Space!',
+      subheadline: '💻 Digital Marketing',
+      badge: 'Campaigns starting at just ₹1999/-',
+      cta: 'Start Now',
+      theme: { bg: '#eef2ff', accent: '#2563eb', text: '#1f2937' }
     }
-  ];
+  ]), []);
+
+  // Merge incoming deals (if any) into a uniform shape
+  const normalizedDeals = Array.isArray(deals) && deals.length > 0
+    ? deals.map((d, i) => ({
+        id: d.id || `deal-${i}`,
+        headline: d.title || 'Special Offer',
+        subheadline: d.description || '',
+        badge: d.price || '',
+        cta: 'Book Now',
+        theme: { bg: '#eaf3ff', accent: '#e53935', text: '#1f2937' }
+      }))
+    : [];
+
+  // Always use our curated six offers to guarantee full rotation
+  const offers = defaultOffers;
+
+  const [page, setPage] = useState(0);
+  const itemsPerPage = 2;
+  const totalPages = Math.ceil(offers.length / itemsPerPage);
+  const start = page * itemsPerPage;
+  const visible = offers.slice(start, start + itemsPerPage);
+
+  const goToPage = (p) => setPage(Math.max(0, Math.min(totalPages - 1, p)));
+
+  // Auto-rotate pages every 1 second
+  useEffect(() => {
+    if (totalPages <= 1) return;
+    const id = setInterval(() => {
+      setPage((prev) => (prev + 1) % totalPages);
+    }, 1000);
+    return () => clearInterval(id);
+  }, [totalPages]);
 
   return (
-    <div style={styles.wrapper}>
-      {/* Main Title and Hire Section */}
-      <section style={styles.mainSection}>
+    <section style={styles.sectionWrapper}>
         <div style={styles.container}>
-          <h1 style={styles.mainTitle}>Books and Offers</h1>
-          
-          {/* Hire Card */}
-          <div style={styles.hireCard}>
-            <h2 style={styles.hireTitle}>Hire Dedicated Media Planner for your business Today!</h2>
-            <div style={styles.hireDetails}>
-              <p style={styles.hirePrice}>Just 499/-</p>
-              <button style={styles.hireButton}>Hire Now</button>
-            </div>
-          </div>
-          
-          <div style={styles.divider}></div>
-        </div>
-      </section>
+        <h2 style={styles.title}>Deals and Offers</h2>
 
-      {/* Media Services Section */}
-      <section style={styles.mediaSection}>
-        <div style={styles.container}>
-          <h2 style={styles.mediaTitle}>What Media are you looking for?</h2>
-          <p style={styles.mediaSubtitle}>
-            The right place for your business: VipLav Advertising Co. provides 360-degree solutions. Book the best advertising options for you online here:
-          </p>
-          
-          <div style={styles.mediaGrid}>
-            {/* Newspaper Advertising */}
-            <div style={styles.mediaCard}>
-              <div style={{...styles.mediaImageContainer, backgroundColor: "#e3f2fd"}}>
-                <div style={styles.newspaperIcon}>📰</div>
+        <div style={styles.sliderWrapper}>
+          <div style={styles.track}>
+            {visible.map((offer) => (
+              <div key={offer.id} style={{ ...styles.bannerCard, background: offer.theme.bg }}>
+                <div style={styles.bannerContent}>
+                  <div>
+                    <h3 style={{ ...styles.bannerHeadline, color: offer.theme.text }}>{offer.headline}</h3>
+                    {offer.subheadline && (
+                      <p style={{ ...styles.bannerSub, color: '#555' }}>{offer.subheadline}</p>
+                    )}
+                    <div style={styles.bannerCtaRow}>
+                      {offer.badge && (
+                        <span style={{ ...styles.badge, borderColor: offer.theme.accent, color: offer.theme.accent }}>{offer.badge}</span>
+                      )}
+                      <button style={{ ...styles.ctaBtn, backgroundColor: offer.theme.accent }}>{offer.cta}</button>
               </div>
-              <div style={styles.mediaCardContent}>
-                <h3 style={styles.mediaCardTitle}>Start Your</h3>
-                <h4 style={styles.mediaCardService}>Newspaper Advertising</h4>
-                <button style={styles.mediaCardButton}>Book Now</button>
+            </div>
+              </div>
+            </div>
+            ))}
               </div>
             </div>
             
-            {/* Digital Marketing */}
-            <div style={styles.mediaCard}>
-              <div style={{...styles.mediaImageContainer, backgroundColor: "#e3f2fd"}}>
-                <div style={styles.digitalIcon}>💻</div>
-              </div>
-              <div style={styles.mediaCardContent}>
-                <h3 style={styles.mediaCardTitle}>Start Your</h3>
-                <h4 style={styles.mediaCardService}>Digital Marketing</h4>
-                <button style={styles.mediaCardButton}>Book Now</button>
-              </div>
-            </div>
-            
-            {/* Radio Advertising */}
-            <div style={styles.mediaCard}>
-              <div style={{...styles.mediaImageContainer, backgroundColor: "#e3f2fd"}}>
-                <div style={styles.radioIcon}>📻</div>
-              </div>
-              <div style={styles.mediaCardContent}>
-                <h3 style={styles.mediaCardTitle}>Start Your</h3>
-                <h4 style={styles.mediaCardService}>Radio Advertising</h4>
-                <button style={styles.mediaCardButton}>Book Now</button>
-              </div>
-            </div>
-            
-            {/* Influencer */}
-            <div style={styles.mediaCard}>
-              <div style={{...styles.mediaImageContainer, backgroundColor: "#e3f2fd"}}>
-                <div style={styles.influencerIcon}>👥</div>
-              </div>
-              <div style={styles.mediaCardContent}>
-                <h3 style={styles.mediaCardTitle}>Start Your</h3>
-                <h4 style={styles.mediaCardService}>Influencer</h4>
-                <button style={{...styles.mediaCardButton, backgroundColor: "#ff4444"}}>
-                  Fill Query or Call 880033...
-                </button>
-              </div>
-            </div>
+        <div style={styles.dotsRow}>
+          {Array.from({ length: totalPages }).map((_, i) => (
+            <button
+              key={i}
+              onClick={() => goToPage(i)}
+              aria-label={`Go to page ${i + 1}`}
+              style={{
+                ...styles.dot,
+                borderColor: i === page ? '#e53935' : '#333',
+                backgroundColor: i === page ? 'transparent' : '#333'
+              }}
+            />
+          ))}
           </div>
         </div>
       </section>
-    </div>
   );
 };
 
 const styles = {
-  wrapper: {
-    backgroundColor: '#f8f9fa',
-    padding: '20px 0 40px 0',
-    fontFamily: 'Arial, sans-serif',
-    minHeight: '100vh'
+  sectionWrapper: {
+    background: '#f3f4f6',
+    padding: '40px 0'
   },
   container: {
     maxWidth: '1200px',
     margin: '0 auto',
     padding: '0 20px'
   },
-  mainTitle: {
-    fontSize: '2.2rem',
-    color: '#333',
-    marginBottom: '30px',
+  title: {
+    fontSize: '2rem',
+    fontWeight: '800',
     textAlign: 'center',
-    fontWeight: 'bold',
-    textTransform: 'uppercase'
-  },
-  mainSection: {
-    marginBottom: '30px'
-  },
-  hireCard: {
-    backgroundColor: '#fff',
-    borderRadius: '10px',
-    padding: '30px',
-    boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-    textAlign: 'center',
-    marginBottom: '30px',
-    border: '1px solid #eee'
-  },
-  hireTitle: {
-    fontSize: '1.8rem',
-    color: '#333',
     marginBottom: '20px',
-    fontWeight: '600',
-    lineHeight: '1.4'
+    color: '#111827'
   },
-  hireDetails: {
+  sliderWrapper: {
+    display: 'grid',
+    gridTemplateColumns: '1fr',
+    alignItems: 'center'
+  },
+  track: {
+    display: 'grid',
+    gridTemplateColumns: '1fr 1fr',
+    gap: '16px'
+  },
+  bannerCard: {
+    borderRadius: '12px',
+    overflow: 'hidden',
+    minHeight: '120px',
     display: 'flex',
-    justifyContent: 'center',
+    alignItems: 'stretch',
+    boxShadow: '0 6px 18px rgba(0,0,0,0.08)'
+  },
+  bannerContent: {
+    flex: 1,
+    padding: '18px 24px',
+    display: 'flex',
     alignItems: 'center',
-    gap: '30px',
+    justifyContent: 'space-between',
+    gap: '16px'
+  },
+  bannerHeadline: {
+    fontSize: '20px',
+    fontWeight: '700',
+    margin: '0 0 8px 0'
+  },
+  bannerSub: {
+    fontSize: '14px',
+    margin: '0 0 12px 0'
+  },
+  bannerCtaRow: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '10px',
     flexWrap: 'wrap'
   },
-  hirePrice: {
-    fontSize: '1.5rem',
-    color: '#333',
-    fontWeight: 'bold',
-    margin: '0'
+  badge: {
+    border: '2px solid',
+    padding: '6px 10px',
+    borderRadius: '30px',
+    fontWeight: '700',
+    fontSize: '12px',
+    backgroundColor: '#fff'
   },
-  hireButton: {
-    padding: '12px 30px',
-    backgroundColor: '#ff4444',
+  ctaBtn: {
+    border: 'none',
     color: '#fff',
-    border: 'none',
-    borderRadius: '5px',
-    fontSize: '1.1rem',
-    cursor: 'pointer',
-    fontWeight: '600',
-    transition: 'all 0.3s',
-    ':hover': {
-      backgroundColor: '#e03e3e',
-      transform: 'translateY(-2px)'
-    }
+    padding: '10px 16px',
+    borderRadius: '6px',
+    fontWeight: '700',
+    cursor: 'pointer'
   },
-  divider: {
-    height: '1px',
-    backgroundColor: '#ddd',
-    margin: '30px 0',
-    width: '100%'
-  },
-  mediaSection: {
-    padding: '20px 0'
-  },
-  mediaTitle: {
-    fontSize: '2rem',
-    color: '#333',
-    marginBottom: '15px',
-    textAlign: 'center',
-    fontWeight: 'bold'
-  },
-  mediaSubtitle: {
-    fontSize: '1.1rem',
-    color: '#666',
-    textAlign: 'center',
-    marginBottom: '40px',
-    lineHeight: '1.6',
-    maxWidth: '800px',
-    marginLeft: 'auto',
-    marginRight: 'auto'
-  },
-  mediaGrid: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-    gap: '25px',
-    maxWidth: '1200px',
-    margin: '0 auto'
-  },
-  mediaCard: {
-    backgroundColor: '#fff',
-    borderRadius: '10px',
-    overflow: 'hidden',
-    boxShadow: '0 5px 15px rgba(0,0,0,0.1)',
-    transition: 'all 0.3s',
-    ':hover': {
-      transform: 'translateY(-5px)',
-      boxShadow: '0 8px 20px rgba(0,0,0,0.15)'
-    }
-  },
-  mediaImageContainer: {
-    height: '180px',
+  dotsRow: {
     display: 'flex',
-    alignItems: 'center',
     justifyContent: 'center',
-    position: 'relative'
+    gap: '10px',
+    marginTop: '16px'
   },
-  newspaperIcon: {
-    fontSize: '80px',
-    color: '#333'
-  },
-  digitalIcon: {
-    fontSize: '80px',
-    color: '#333'
-  },
-  radioIcon: {
-    fontSize: '80px',
-    color: '#333'
-  },
-  influencerIcon: {
-    fontSize: '80px',
-    color: '#333'
-  },
-  mediaCardContent: {
-    padding: '25px',
-    textAlign: 'center'
-  },
-  mediaCardTitle: {
-    fontSize: '1.1rem',
-    color: '#666',
-    marginBottom: '5px',
-    fontWeight: '400'
-  },
-  mediaCardService: {
-    fontSize: '1.4rem',
-    color: '#333',
-    marginBottom: '20px',
-    fontWeight: 'bold'
-  },
-  mediaCardButton: {
-    padding: '12px 25px',
+  dot: {
+    width: '12px',
+    height: '12px',
+    borderRadius: '50%',
+    border: '2px solid',
     backgroundColor: '#333',
-    color: 'white',
-    border: 'none',
-    borderRadius: '5px',
-    fontSize: '1rem',
-    cursor: 'pointer',
-    fontWeight: '600',
-    width: '100%',
-    transition: 'all 0.3s',
-    ':hover': {
-      backgroundColor: '#222'
-    }
+    cursor: 'pointer'
   }
 };
 
-export default BooksOffers;
+export default DealsOffers;
