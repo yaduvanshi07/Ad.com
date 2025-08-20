@@ -79,7 +79,7 @@ const Hero = ({ navigateToPage }) => {
 
   return (
          <div style={{ 
-       background: "linear-gradient(135deg, #34495e 0%, #2c3e50 100%)",
+       background: "linear-gradient(135deg, #e0f7fa 0%, #b3e5fc 100%)",
        fontFamily: "Arial, sans-serif",
        padding: "20px",
        minHeight: "600px"

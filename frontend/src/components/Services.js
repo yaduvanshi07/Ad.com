@@ -25,6 +25,8 @@ const Services = ({ services }) => {
     const iconMap = {
       '📰': 'fas fa-newspaper',
       '💻': 'fas fa-laptop',
+      '🌐': 'fas fa-globe',
+      '📧': 'fas fa-envelope',
       '📻': 'fas fa-broadcast-tower',
       '🎬': 'fas fa-film',
       '📺': 'fas fa-tv',
@@ -47,7 +49,7 @@ const Services = ({ services }) => {
       description: 'Front page, display and classified ads in top national and regional dailies.',
       icon: '📰',
       image: '/services/newspaper.jpg',
-      features: ['Front Page/FP+ options', 'Display & Classifieds', 'City-wise or Pan-India']
+      features: []
     },
     {
       id: 2,
@@ -55,15 +57,15 @@ const Services = ({ services }) => {
       description: 'On‑screen ads and lobby placements across multiplex chains.',
       icon: '🎬',
       image: '/services/cinema.jpg',
-      features: ['On-screen spots', 'Lobby branding', 'Premium locations']
+      features: []
     },
     {
       id: 3,
       name: 'TV Advertising',
-      description: 'Prime-time and regional TV inventory tailored to your audience.',
+      description: 'Prime-time packages , Regional & national channels , Category targeting',
       icon: '📺',
       image: '/services/tv.jpg',
-      features: ['Prime-time packages', 'Regional & national channels', 'Category targeting']
+      features: []
     },
     {
       id: 4,
@@ -71,15 +73,15 @@ const Services = ({ services }) => {
       description: 'City-wide reach with RJ mentions, sponsorships and spot ads.',
       icon: '📻',
       image: '/services/radio.jpg',
-      features: ['RJ mentions', 'Station sponsorships', 'High-frequency spot plans']
+      features: []
     },
     {
       id: 5,
       name: 'Digital Marketing',
-      description: 'Search, social, display and remarketing with measurable ROI.',
-      icon: '💻',
+      description: 'Meta & Google Ads, SEO & Content, Remarketing & funnels',
+      icon: '📧',
       image: '/services/digital.jpg',
-      features: ['Meta & Google Ads', 'SEO & Content', 'Remarketing & funnels']
+      features: []
     },
     {
       id: 6,
@@ -87,7 +89,7 @@ const Services = ({ services }) => {
       description: 'Creator collaborations across Instagram, YouTube and more.',
       icon: '🌟',
       image: '/services/influencer.jpg',
-      features: ['Curated creators', 'Script & brief support', 'Performance reporting']
+      features: []
     }
   ];
 
@@ -118,7 +120,7 @@ const Services = ({ services }) => {
       id: 10,
       name: 'Digital PR',
       description: 'Online reputation management and digital public relations.',
-      icon: '📢',
+      icon: '🌐',
       features: ['Press releases', 'Media outreach', 'Brand reputation']
     },
     {
@@ -144,6 +146,8 @@ const Services = ({ services }) => {
     }
   ];
 
+  const headerHeight = 32; // Reduced from 48px to 32px
+
   const styles = {
     services: {
       padding: '80px 0',
@@ -153,7 +157,7 @@ const Services = ({ services }) => {
     container: {
       maxWidth: '1400px',
       margin: '0 auto',
-      padding: '0 20px'
+      padding: '0 60px'
     },
     title: {
       fontSize: '3.5rem',
@@ -175,19 +179,39 @@ const Services = ({ services }) => {
     },
     servicesGrid: {
       display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(380px, 1fr))',
-      gap: '35px',
+      gridTemplateColumns: 'repeat(3, 1fr)',
+      gap: '40px',
       marginBottom: '50px'
     },
     serviceCard: {
       position: 'relative',
-      borderRadius: '20px',
+      borderRadius: '18px',
       overflow: 'hidden',
-      boxShadow: '0 20px 40px rgba(0,0,0,0.1)',
+      boxShadow: '0 15px 35px rgba(0,0,0,0.1)',
       transition: 'all 0.4s ease',
       cursor: 'pointer',
-      height: '420px',
+      height: '280px',
       transform: 'translateY(0)',
+    },
+    serviceHeader: {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      right: 0,
+      height: `${headerHeight}px`,
+      backgroundColor: '#f5f5dc',
+      color: '#8b4513',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      fontWeight: '700', // Reduced from 800
+      letterSpacing: '0.3px', // Reduced from 0.5px
+      textTransform: 'uppercase',
+      borderTopLeftRadius: '18px',
+      borderTopRightRadius: '18px',
+      zIndex: 2,
+      boxShadow: '0 4px 15px rgba(245, 245, 220, 0.6)',
+      fontSize: '0.8rem' // Added smaller font size
     },
     serviceCardHover: {
       transform: 'translateY(-15px)',
@@ -201,12 +225,12 @@ const Services = ({ services }) => {
     },
     serviceOverlay: {
       position: 'absolute',
-      top: '0',
+      top: `${headerHeight}px`,
       left: '0',
       right: '0',
-      bottom: '70px',
+      bottom: '36px', // Reduced from 50px to account for smaller button
       background: 'linear-gradient(45deg, rgba(102, 126, 234, 0.95) 0%, rgba(118, 75, 162, 0.95) 100%)',
-      padding: '25px',
+      padding: '20px',
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
@@ -220,23 +244,23 @@ const Services = ({ services }) => {
       opacity: '1'
     },
     serviceIcon: {
-      fontSize: '3rem',
-      marginBottom: '15px',
+      fontSize: '2.5rem',
+      marginBottom: '12px',
       color: '#fff'
     },
     serviceName: {
-      fontSize: '1.7rem',
+      fontSize: '1.5rem',
       fontWeight: '800',
-      marginBottom: '12px',
+      marginBottom: '10px',
       color: '#fff',
       letterSpacing: '-0.01em',
       textShadow: '0 2px 4px rgba(0,0,0,0.3)',
       lineHeight: '1.2'
     },
     serviceDescription: {
-      fontSize: '1rem',
-      lineHeight: '1.5',
-      marginBottom: '15px',
+      fontSize: '0.9rem',
+      lineHeight: '1.4',
+      marginBottom: '12px',
       color: 'rgba(255,255,255,0.95)',
       fontWeight: '500',
       textShadow: '0 1px 2px rgba(0,0,0,0.2)'
@@ -247,11 +271,11 @@ const Services = ({ services }) => {
       margin: '0'
     },
     serviceFeatureItem: {
-      padding: '3px 0',
-      fontSize: '0.85rem',
+      padding: '2px 0',
+      fontSize: '0.8rem',
       color: 'rgba(255,255,255,0.85)',
       position: 'relative',
-      paddingLeft: '15px'
+      paddingLeft: '12px'
     },
     serviceFooter: {
       position: 'absolute',
@@ -261,28 +285,28 @@ const Services = ({ services }) => {
       padding: '0',
       background: 'rgba(0,0,0,0.1)',
       backdropFilter: 'blur(10px)',
-      borderBottomLeftRadius: '20px',
-      borderBottomRightRadius: '20px'
+      borderBottomLeftRadius: '18px',
+      borderBottomRightRadius: '18px'
     },
     ctaButton: {
       width: '100%',
-      padding: '16px 24px',
-      backgroundColor: '#ff6b6b',
-      color: 'white',
+      padding: '10px 16px', // Reduced from 14px 20px
+      backgroundColor: '#f5f5dc',
+      color: '#8b4513',
       border: 'none',
-      borderRadius: '0 0 20px 20px',
-      fontSize: '1.1rem',
-      fontWeight: '700',
+      borderRadius: '0 0 18px 18px',
+      fontSize: '0.85rem', // Reduced from 1rem
+      fontWeight: '600', // Reduced from 700
       cursor: 'pointer',
       transition: 'all 0.3s ease',
-      boxShadow: '0 4px 15px rgba(255, 107, 107, 0.4)',
-      letterSpacing: '0.5px',
+      boxShadow: '0 4px 15px rgba(245, 245, 220, 0.6)',
+      letterSpacing: '0.3px', // Reduced from 0.5px
       textTransform: 'uppercase'
     },
     ctaButtonHover: {
-      backgroundColor: '#ff5252',
+      backgroundColor: '#f0e68c',
       transform: 'translateY(-2px)',
-      boxShadow: '0 8px 25px rgba(255, 107, 107, 0.6)'
+      boxShadow: '0 8px 25px rgba(240, 230, 140, 0.8)'
     },
     showMoreButton: {
       display: 'block',
@@ -299,20 +323,23 @@ const Services = ({ services }) => {
     },
     additionalServicesGrid: {
       display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-      gap: '25px',
+      gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+      gap: '24px',
       marginBottom: '50px'
     },
     additionalServiceCard: {
       backgroundColor: 'white',
-      borderRadius: '15px',
+      borderRadius: '12px',
       padding: '20px',
-      boxShadow: '0 10px 30px rgba(0,0,0,0.08)',
+      boxShadow: '0 8px 25px rgba(0,0,0,0.08)',
       transition: 'all 0.3s ease',
-      height: '200px',
+      height: 'auto',
+      minHeight: '180px',
       display: 'flex',
       flexDirection: 'column',
-      justifyContent: 'space-between'
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      border: '1px solid #f1f5f9'
     },
     whyChooseSection: {
       background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
@@ -374,6 +401,7 @@ const Services = ({ services }) => {
                 onMouseEnter={() => setHoveredCards(prev => ({...prev, [service.id]: true}))}
                 onMouseLeave={() => setHoveredCards(prev => ({...prev, [service.id]: false}))}
               >
+                <div style={styles.serviceHeader}>{service.name}</div>
                 <img 
                   src={service.image} 
                   alt={service.name} 
@@ -455,50 +483,40 @@ const Services = ({ services }) => {
                   e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,0,0,0.08)';
                 }}
               >
-                <div>
-                  <div style={{ fontSize: '2rem', marginBottom: '10px', color: '#667eea' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px', flex: 1 }}>
+                  <div style={{ fontSize: '1.8rem', color: '#667eea' }}>
                     <i className={getServiceIcon(service.icon)}></i>
                   </div>
-                  <h4 style={{ fontSize: '1.1rem', fontWeight: '600', marginBottom: '8px', color: '#2d3748', lineHeight: '1.3' }}>
+                  <h4 style={{ fontSize: '1rem', fontWeight: '700', color: '#2d3748', margin: 0, textAlign: 'center' }}>
                     {service.name}
                   </h4>
-                  <p style={{ fontSize: '0.85rem', color: '#64748b', lineHeight: '1.4', marginBottom: '10px' }}>
+                  <p style={{ fontSize: '0.85rem', color: '#64748b', textAlign: 'center', margin: 0, lineHeight: '1.4' }}>
                     {service.description}
                   </p>
-                  <ul style={{ listStyle: 'none', padding: '0', margin: '0 0 10px 0' }}>
-                    {service.features.slice(0, 2).map((feature, index) => (
-                      <li key={index} style={{ 
-                        fontSize: '0.75rem', 
-                        color: '#64748b', 
-                        padding: '2px 0',
-                        position: 'relative',
-                        paddingLeft: '12px'
-                      }}>
-                        <span style={{ position: 'absolute', left: '0', color: '#10b981', fontSize: '0.7rem' }}>•</span>
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
                 </div>
                 <button 
                   style={{
+                    width: '100%',
                     padding: '8px 16px',
-                    backgroundColor: '#667eea',
-                    color: 'white',
+                    backgroundColor: '#f5f5dc',
+                    color: '#8b4513',
                     border: 'none',
-                    borderRadius: '20px',
-                    fontSize: '0.8rem',
+                    borderRadius: '8px',
+                    fontSize: '0.85rem',
                     fontWeight: '600',
                     cursor: 'pointer',
-                    transition: 'all 0.3s ease'
+                    transition: 'all 0.3s ease',
+                    marginTop: '12px',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.3px'
                   }}
                   onClick={() => handleBookService(service.name)}
                   onMouseEnter={(e) => {
-                    e.target.style.backgroundColor = '#5a67d8';
-                    e.target.style.transform = 'translateY(-2px)';
+                    e.target.style.backgroundColor = '#f0e68c';
+                    e.target.style.transform = 'translateY(-1px)';
                   }}
                   onMouseLeave={(e) => {
-                    e.target.style.backgroundColor = '#667eea';
+                    e.target.style.backgroundColor = '#f5f5dc';
                     e.target.style.transform = 'translateY(0)';
                   }}
                 >
@@ -658,4 +676,13 @@ const Services = ({ services }) => {
   );
 };
 
-export default Services;
+function App() {
+  return (
+    <div className="min-h-screen bg-gray-100">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+      <Services />
+    </div>
+  );
+}
+
+export default App;

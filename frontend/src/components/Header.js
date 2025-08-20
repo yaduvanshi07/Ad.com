@@ -34,7 +34,7 @@ const Header = () => {
     <>
              {/* Main Header */}
        <div style={{
-         background: "linear-gradient(135deg, #34495e 0%, #2c3e50 100%)",
+         background: "linear-gradient(135deg, #e0f7fa 0%, #b3e5fc 100%)",
          color: "white",
          padding: "4px 0",
          fontFamily: "'Poppins', 'Montserrat', sans-serif",
