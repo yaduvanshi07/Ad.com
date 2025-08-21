@@ -41,12 +41,12 @@ const Footer = () => {
           <div className="footer-section">
             <div className="footer-logo">
               <h3>VipLav Advertising Co.</h3>
-              <p>Your trusted partner for all advertising needs. We provide 360-degree solutions for businesses of all sizes.</p>
+              <p>More than just ads — we build lasting partnerships, offering customized advertising solutions to power your brand’s success.</p>
             </div>
           </div>
 
           <div className="footer-section">
-            <h4>Services</h4>
+            <h4>Top Services</h4>
             <ul>
               <li><a href="#newspaper">Newspaper Ads</a></li>
               <li><a href="#digital">Digital Marketing</a></li>

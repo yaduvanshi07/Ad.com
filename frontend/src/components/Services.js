@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Services = ({ services, navigateToPage }) => {
+  const navigate = useNavigate();
   const [selectedService, setSelectedService] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [showMoreServices, setShowMoreServices] = useState(false);
@@ -18,15 +20,25 @@ const Services = ({ services, navigateToPage }) => {
 
   const handleBookService = (serviceName) => {
     const routeMap = {
-      'Newspaper Advertising': 'newspaper-advertising',
-      'Document Name Correction': 'document-name-correction',
-      'Gazette Publication': 'gazette-publication'
+      'Newspaper Advertising': '/services/newspaper-advertising',
+      'Cinema Advertising': '/services/cinema-advertising',
+      'TV Advertising': '/services/tv-advertising',
+      'Radio Advertising': '/services/radio-advertising',
+      'Digital Marketing': '/services/digital-marketing',
+      'Influencer Marketing': '/services/influencer-marketing',
+      'Lift Branding': '/services/lift-branding',
+      'Hyperlocal SMS': '/services/hyperlocal-sms',
+      'OTT/Media Buying': '/services/ott-media-buying',
+      'Digital PR': '/services/digital-pr',
+      'Programmatic Ads': '/services/programmatic-ads',
+      'Transit Media': '/services/transit-media',
+      'Outdoor/DOOH': '/services/outdoor-dooh',
+      'Document Name Correction': '/services/document-name-correction',
+      'Gazette Publication': '/services/gazette-publication'
     };
     const route = routeMap[serviceName];
-    if (navigateToPage && route) {
-      navigateToPage(route);
-    } else {
-      alert(`Booking ${serviceName}... This would redirect to booking form.`);
+    if (route) {
+      navigate(route);
       closeModal();
     }
   };
@@ -410,7 +422,10 @@ const Services = ({ services, navigateToPage }) => {
     <section style={styles.services} id="services">
       <div style={styles.container}>
         <h2 style={styles.title}>What Media are you looking for?</h2>
-        <p style={styles.subtitle}>Book your ads easily and reach your target audience effectively</p>
+        <p style={{ ...styles.subtitle, fontSize: "14px" }}>
+  More than just ads — we build lasting partnerships, offering customized advertising solutions to power your brand’s success.
+</p>
+
         
         <div style={styles.servicesGrid}>
           {defaultServices.map((service) => {
@@ -513,11 +528,11 @@ const Services = ({ services, navigateToPage }) => {
                   onClick={() => handleBookService(service.name)}
                 >
                   <div style={{ fontSize: '1.8rem', color: '#667eea' }}>
-                    <i className={getServiceIcon(service.icon)}></i>
-                  </div>
+                      <i className={getServiceIcon(service.icon)}></i>
+                    </div>
                   <h4 style={{ fontSize: '1rem', fontWeight: '700', color: '#2d3748', margin: 0, textAlign: 'center' }}>
-                    {service.name}
-                  </h4>
+                      {service.name}
+                    </h4>
                   <p style={{ fontSize: '0.85rem', color: '#64748b', textAlign: 'center', margin: 0, lineHeight: '1.4' }}>
                     {service.description}
                   </p>

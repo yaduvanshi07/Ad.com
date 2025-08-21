@@ -375,20 +375,20 @@ const App = () => {
           
           {/* 404 Route */}
           <Route path="*" element={
-            <div style={{
+                <div style={{
               minHeight: "80vh",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
               background: "linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%)",
               padding: "20px"
-            }}>
-              <div style={{
-                backgroundColor: "white",
+                }}>
+                  <div style={{
+                    backgroundColor: "white",
                 padding: "50px",
                 borderRadius: "20px",
                 boxShadow: "0 15px 40px rgba(0, 0, 0, 0.2)",
-                textAlign: "center",
+                    textAlign: "center",
                 maxWidth: "600px"
               }}>
                 <div style={{ fontSize: "80px", marginBottom: "20px" }}>🔍</div>
@@ -405,27 +405,27 @@ const App = () => {
                   fontSize: "18px"
                 }}>
                   Oops! The page you're looking for doesn't exist.
-                </p>
-                <button 
+                    </p>
+                    <button 
                   onClick={() => window.location.href = '/'}
-                  style={{
+                      style={{
                     backgroundColor: "#ff6b6b",
-                    color: "white",
+                        color: "white",
                     padding: "15px 30px",
-                    border: "none",
+                        border: "none",
                     borderRadius: "10px",
-                    cursor: "pointer",
-                    fontWeight: "bold",
-                    fontSize: "16px",
+                        cursor: "pointer",
+                        fontWeight: "bold",
+                        fontSize: "16px",
                     transition: "all 0.3s ease"
-                  }}
+                      }}
                   onMouseOver={(e) => e.target.style.backgroundColor = "#ee5a24"}
                   onMouseOut={(e) => e.target.style.backgroundColor = "#ff6b6b"}
-                >
+                    >
                   🏠 Go to Homepage
-                </button>
-              </div>
-            </div>
+                    </button>
+                  </div>
+                </div>
           } />
         </Routes>
         <Footer />
