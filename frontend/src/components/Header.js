@@ -6,6 +6,32 @@ const Header = () => {
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const navigate = useNavigate();
 
+  // Service navigation mapping
+  const handleServiceNavigation = (service) => {
+    const serviceRoutes = {
+      "Newspaper Advertising": "/services/newspaper-advertising",
+      "Cinema Advertising": "/services/cinema-advertising", 
+      "TV Advertising": "/services/tv-advertising",
+      "Lift Branding": "/services/lift-branding",
+      "Hyperlocal SMS": "/services/hyperlocal-sms",
+      "OTT/Media Buying": "/services/ott-media-buying",
+      "Digital Marketing": "/services/digital-marketing",
+      "Digital PR": "/services/digital-pr",
+      "Programmatic Ads": "/services/programmatic-ads",
+      "Document Name Correction": "/services/document-name-correction",
+      "Gazette Publication": "/services/gazette-publication",
+      "Transit Media": "/services/transit-media",
+      "Outdoor/DOOH": "/services/outdoor-dooh",
+      "Radio Advertising": "/services/radio-advertising",
+      "Influencer Marketing": "/services/influencer-marketing"
+    };
+    
+    if (serviceRoutes[service]) {
+      navigate(serviceRoutes[service]);
+      setIsServicesOpen(false); // Close dropdown after navigation
+    }
+  };
+
   const services = [
     {
       column1: [
@@ -209,6 +235,7 @@ const Header = () => {
                             alignItems: "center",
                             gap: "8px"
                           }}
+                          onClick={() => handleServiceNavigation(service)}
                           onMouseEnter={(e) => e.target.style.color = "#2E5BBA"}
                           onMouseLeave={(e) => e.target.style.color = "#333"}
                         >
@@ -247,6 +274,7 @@ const Header = () => {
                             alignItems: "center",
                             gap: "8px"
                           }}
+                          onClick={() => handleServiceNavigation(service)}
                           onMouseEnter={(e) => e.target.style.color = "#2E5BBA"}
                           onMouseLeave={(e) => e.target.style.color = "#333"}
                         >
@@ -284,6 +312,7 @@ const Header = () => {
                             alignItems: "center",
                             gap: "8px"
                           }}
+                          onClick={() => handleServiceNavigation(service)}
                           onMouseEnter={(e) => e.target.style.color = "#2E5BBA"}
                           onMouseLeave={(e) => e.target.style.color = "#333"}
                         >
@@ -330,87 +359,6 @@ const Header = () => {
           </div>
         </div>
       </div>
-
-
-      {/* <div style={{
-        backgroundColor: "#5B7BD6",
-        color: "white",
-        fontFamily: "Arial, sans-serif"
-      }}>
-        <div style={{
-          maxWidth: "1200px",
-          margin: "0 auto",
-          display: "flex"
-        }}>
-          <div style={{
-            backgroundColor: "rgba(255,255,255,0.2)",
-            padding: "12px 10px",
-            cursor: "pointer",
-            transition: "background-color 0.3s ease"
-          }}
-          onMouseOver={(e) => e.target.style.backgroundColor = "rgba(255,255,255,0.3)"}
-          onMouseOut={(e) => e.target.style.backgroundColor = "rgba(255,255,255,0.2)"}>❮</div>
-
-          <div style={{ display: "flex", flex: 1 }}>
-            <div style={{
-              padding: "12px 20px",
-              backgroundColor: "rgba(255,255,255,0.1)",
-              borderBottom: "2px solid white",
-              cursor: "pointer",
-              fontSize: "13px",
-              transition: "background-color 0.3s ease"
-            }}>🏠 Home</div>
-            <div style={{
-              padding: "12px 20px",
-              backgroundColor: "rgba(0,0,0,0.2)",
-              cursor: "pointer",
-              fontSize: "13px",
-              transition: "background-color 0.3s ease"
-            }}
-            onMouseOver={(e) => e.target.style.backgroundColor = "rgba(0,0,0,0.3)"}
-            onMouseOut={(e) => e.target.style.backgroundColor = "rgba(0,0,0,0.2)"}>📰 Newspaper Advertising</div>
-            <div style={{ 
-              padding: "12px 20px", 
-              cursor: "pointer", 
-              fontSize: "13px",
-              transition: "background-color 0.3s ease"
-            }}
-            onMouseOver={(e) => e.target.style.backgroundColor = "rgba(255,255,255,0.1)"}
-            onMouseOut={(e) => e.target.style.backgroundColor = "transparent"}>
-              💻 Digital Marketing
-            </div>
-            <div style={{ 
-              padding: "12px 20px", 
-              cursor: "pointer", 
-              fontSize: "13px",
-              transition: "background-color 0.3s ease"
-            }}
-            onMouseOver={(e) => e.target.style.backgroundColor = "rgba(255,255,255,0.1)"}
-            onMouseOut={(e) => e.target.style.backgroundColor = "transparent"}>
-              📻 Radio Advertising
-            </div>
-            <div style={{ 
-              padding: "12px 20px", 
-              cursor: "pointer", 
-              fontSize: "13px",
-              transition: "background-color 0.3s ease"
-            }}
-            onMouseOver={(e) => e.target.style.backgroundColor = "rgba(255,255,255,0.1)"}
-            onMouseOut={(e) => e.target.style.backgroundColor = "transparent"}>
-              🎬 Cinema Advertising
-            </div>
-          </div>
-
-          <div style={{
-            backgroundColor: "#E53E3E",
-            padding: "12px 10px",
-            cursor: "pointer",
-            transition: "background-color 0.3s ease"
-          }}
-          onMouseOver={(e) => e.target.style.backgroundColor = "#cc3333"}
-          onMouseOut={(e) => e.target.style.backgroundColor = "#E53E3E"}>❯</div>
-        </div>
-      </div> */}
 
       {/* Enhanced Fixed Call Back Button */}
       <div style={{
