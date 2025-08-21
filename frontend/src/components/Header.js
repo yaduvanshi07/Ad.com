@@ -19,7 +19,9 @@ const Header = () => {
         "OTT/Media Buying",
         "Digital Marketing",
         "Digital PR",
-        "Programmatic Ads"
+        "Programmatic Ads",
+        "Document Name Correction",
+        "Gazette Publication"
       ],
       column3: [
         "Transit Media",

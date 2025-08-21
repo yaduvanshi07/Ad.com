@@ -39,7 +39,9 @@ const Hero = ({ navigateToPage }) => {
     { icon: "🚌", title: "Transit Media", page: "transit-media" },
     { icon: "🏢", title: "Outdoor/DOOH", page: "outdoor-dooh" },
     { icon: "📻", title: "Radio Advertising", page: "radio-advertising" },
-    { icon: "🌟", title: "Influencer Marketing", page: "influencer-marketing" }
+    { icon: "🌟", title: "Influencer Marketing", page: "influencer-marketing" },
+    { icon: "🪪", title: "Document Name Correction", page: "document-name-correction" },
+    { icon: "📜", title: "Gazette Publication", page: "gazette-publication" }
   ];
 
   const [current, setCurrent] = useState(0);

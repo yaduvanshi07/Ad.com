@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Services = ({ services }) => {
+const Services = ({ services, navigateToPage }) => {
   const [selectedService, setSelectedService] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [showMoreServices, setShowMoreServices] = useState(false);
@@ -17,8 +17,18 @@ const Services = ({ services }) => {
   };
 
   const handleBookService = (serviceName) => {
-    alert(`Booking ${serviceName}... This would redirect to booking form.`);
-    closeModal();
+    const routeMap = {
+      'Newspaper Advertising': 'newspaper-advertising',
+      'Document Name Correction': 'document-name-correction',
+      'Gazette Publication': 'gazette-publication'
+    };
+    const route = routeMap[serviceName];
+    if (navigateToPage && route) {
+      navigateToPage(route);
+    } else {
+      alert(`Booking ${serviceName}... This would redirect to booking form.`);
+      closeModal();
+    }
   };
 
   const getServiceIcon = (iconName) => {
@@ -36,7 +46,9 @@ const Services = ({ services }) => {
       '🎯': 'fas fa-bullseye',
       '📢': 'fas fa-megaphone',
       '🖥️': 'fas fa-desktop',
-      '🚌': 'fas fa-bus'
+      '🚌': 'fas fa-bus',
+      '🪪': 'fas fa-id-card',
+      '📜': 'fas fa-scroll'
     };
     return iconMap[iconName] || 'fas fa-star';
   };
@@ -143,6 +155,20 @@ const Services = ({ services }) => {
       description: 'Digital and traditional outdoor advertising solutions.',
       icon: '📺',
       features: ['Billboard campaigns', 'Digital displays', 'Prime locations']
+    },
+    {
+      id: 14,
+      name: 'Document Name Correction',
+      description: 'Passport, Aadhaar, PAN, Driving Licence, Education Documents',
+      icon: '🪪',
+      features: ['Passport', 'Aadhaar', 'PAN', 'Driving Licence', 'Education']
+    },
+    {
+      id: 15,
+      name: 'Gazette Publication',
+      description: 'Official name change and public notices.',
+      icon: '📜',
+      features: ['Name change', 'Public notices']
     }
   ];
 
@@ -483,7 +509,9 @@ const Services = ({ services }) => {
                   e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,0,0,0.08)';
                 }}
               >
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px', flex: 1 }}>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px', flex: 1 }}
+                  onClick={() => handleBookService(service.name)}
+                >
                   <div style={{ fontSize: '1.8rem', color: '#667eea' }}>
                     <i className={getServiceIcon(service.icon)}></i>
                   </div>

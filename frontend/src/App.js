@@ -9,6 +9,8 @@ import CaseStudies from './components/CaseStudies';
 import Footer from './components/Footer';
 import HowToBook from './pages/HowToBook';
 import NewspaperAdvertising from './components/NewspaperAdvertising';
+import DocumentNameCorrection from './pages/DocumentNameCorrection';
+import GazettePublication from './pages/GazettePublication';
 
 // Main App Component with Routing
 const App = () => {
@@ -154,12 +156,14 @@ const App = () => {
                 <>
                   <Hero navigateToPage={navigateToPage} />
                   <DealsOffers deals={deals} />
-                  <Services services={services} />
+                  <Services services={services} navigateToPage={navigateToPage} />
                   <Stats stats={stats} />
                   <CaseStudies caseStudies={caseStudies} />
                 </>
               )}
               {currentPage === 'newspaper-advertising' && <NewspaperAdvertising navigateToPage={navigateToPage} />}
+              {currentPage === 'document-name-correction' && <DocumentNameCorrection navigateToPage={navigateToPage} />}
+              {currentPage === 'gazette-publication' && <GazettePublication navigateToPage={navigateToPage} />}
               
               {/* Coming Soon Pages */}
               {currentPage !== 'home' && currentPage !== 'newspaper-advertising' && (
