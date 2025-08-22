@@ -11,6 +11,19 @@ import HowToBook from './pages/HowToBook';
 import DocumentNameCorrection from './pages/DocumentNameCorrection';
 import GazettePublication from './pages/GazettePublication';
 
+// New Pages
+import AboutUs from './pages/AboutUs';
+import Careers from './pages/Careers';
+import Blog from './pages/Blog';
+import ContactUs from './pages/ContactUs';
+import Login from './pages/Login';
+import Cart from './pages/Cart';
+import FAQ from './pages/FAQ';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfService from './pages/TermsOfService';
+import Pricing from './pages/Pricing';
+import HelpCenter from './pages/HelpCenter';
+
 // Traditional Media Components - Import only existing files
 import CinemaAdvertising from './components/services/TraditionalMedia/CinemaAdvertising';
 import DigitalMarketing from './components/services/TraditionalMedia/DigitalMarketing';
@@ -372,6 +385,19 @@ const App = () => {
           <Route path="/services/outdoor-dooh" element={<OutdoorDOOH />} />
           <Route path="/services/radio-advertising" element={<RadioAdvertising />} />
           <Route path="/services/influencer-marketing" element={<InfluencerMarketing />} />
+          
+          {/* New Pages Routes */}
+          <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/careers" element={<Careers />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/contact-us" element={<ContactUs />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/faq" element={<FAQ />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-of-service" element={<TermsOfService />} />
+          <Route path="/pricing" element={<Pricing />} />
+          <Route path="/help-center" element={<HelpCenter />} />
           
           {/* 404 Route */}
           <Route path="*" element={

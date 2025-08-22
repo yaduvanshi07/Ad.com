@@ -3,20 +3,8 @@ import { useNavigate } from 'react-router-dom';
 
 const Services = ({ services, navigateToPage }) => {
   const navigate = useNavigate();
-  const [selectedService, setSelectedService] = useState(null);
-  const [showModal, setShowModal] = useState(false);
   const [showMoreServices, setShowMoreServices] = useState(false);
   const [hoveredCards, setHoveredCards] = useState({});
-
-  const handleServiceClick = (service) => {
-    setSelectedService(service);
-    setShowModal(true);
-  };
-
-  const closeModal = () => {
-    setShowModal(false);
-    setSelectedService(null);
-  };
 
   const handleBookService = (serviceName) => {
     const routeMap = {
@@ -39,7 +27,6 @@ const Services = ({ services, navigateToPage }) => {
     const route = routeMap[serviceName];
     if (route) {
       navigate(route);
-      closeModal();
     }
   };
 
@@ -438,7 +425,7 @@ const Services = ({ services, navigateToPage }) => {
                   ...styles.serviceCard,
                   ...(isHovered ? styles.serviceCardHover : {})
                 }}
-                onClick={() => handleServiceClick(service)}
+                onClick={() => handleBookService(service.name)}
                 onMouseEnter={() => setHoveredCards(prev => ({...prev, [service.id]: true}))}
                 onMouseLeave={() => setHoveredCards(prev => ({...prev, [service.id]: false}))}
               >
@@ -524,7 +511,8 @@ const Services = ({ services, navigateToPage }) => {
                   e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,0,0,0.08)';
                 }}
               >
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px', flex: 1 }}
+                <div 
+                  style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px', flex: 1, cursor: 'pointer' }}
                   onClick={() => handleBookService(service.name)}
                 >
                   <div style={{ fontSize: '1.8rem', color: '#667eea' }}>
@@ -597,123 +585,7 @@ const Services = ({ services, navigateToPage }) => {
           </div>
         </div>
 
-        {/* Service Details Modal */}
-        {showModal && selectedService && (
-          <div 
-            style={{
-              position: 'fixed',
-              top: '0',
-              left: '0',
-              right: '0',
-              bottom: '0',
-              backgroundColor: 'rgba(0,0,0,0.7)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              zIndex: '1000',
-              backdropFilter: 'blur(5px)'
-            }}
-            onClick={closeModal}
-          >
-            <div 
-              style={{
-                backgroundColor: 'white',
-                borderRadius: '20px',
-                padding: '40px',
-                maxWidth: '600px',
-                width: '90%',
-                maxHeight: '80%',
-                overflow: 'auto',
-                boxShadow: '0 25px 50px rgba(0,0,0,0.3)'
-              }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px' }}>
-                <h3 style={{ fontSize: '2rem', fontWeight: '700', color: '#2d3748', margin: '0' }}>
-                  {selectedService.name}
-                </h3>
-                <button 
-                  style={{
-                    background: 'none',
-                    border: 'none',
-                    fontSize: '1.5rem',
-                    cursor: 'pointer',
-                    color: '#64748b',
-                    padding: '5px'
-                  }}
-                  onClick={closeModal}
-                >
-                  <i className="fas fa-times"></i>
-                </button>
-              </div>
-              
-              <div>
-                <p style={{ fontSize: '1.1rem', lineHeight: '1.6', color: '#4a5568', marginBottom: '25px' }}>
-                  {selectedService.description}
-                </p>
-                
-                <h4 style={{ fontSize: '1.4rem', fontWeight: '600', marginBottom: '15px', color: '#2d3748' }}>
-                  Features Included:
-                </h4>
-                <ul style={{ listStyle: 'none', padding: '0', marginBottom: '30px' }}>
-                  {selectedService.features && selectedService.features.map((feature, index) => (
-                    <li key={index} style={{ 
-                      padding: '8px 0', 
-                      color: '#4a5568',
-                      fontSize: '1rem',
-                      position: 'relative',
-                      paddingLeft: '25px'
-                    }}>
-                      <i className="fas fa-check" style={{ 
-                        color: '#10b981', 
-                        position: 'absolute',
-                        left: '0',
-                        top: '10px'
-                      }}></i>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-                
-                <div style={{ textAlign: 'center' }}>
-                  <button 
-                    style={{
-                      padding: '12px 30px',
-                      backgroundColor: '#ff6b6b',
-                      color: 'white',
-                      border: 'none',
-                      borderRadius: '50px',
-                      fontSize: '1.1rem',
-                      fontWeight: '600',
-                      cursor: 'pointer',
-                      marginRight: '15px',
-                      transition: 'all 0.3s ease'
-                    }}
-                    onClick={() => handleBookService(selectedService.name)}
-                  >
-                    Book This Service
-                  </button>
-                  <button 
-                    style={{
-                      padding: '12px 30px',
-                      backgroundColor: 'transparent',
-                      color: '#667eea',
-                      border: '2px solid #667eea',
-                      borderRadius: '50px',
-                      fontSize: '1.1rem',
-                      fontWeight: '600',
-                      cursor: 'pointer',
-                      transition: 'all 0.3s ease'
-                    }}
-                    onClick={() => alert('Get quote functionality')}
-                  >
-                    Get Quote
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
+
       </div>
     </section>
   );

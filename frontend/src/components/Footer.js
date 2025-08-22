@@ -1,8 +1,25 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Footer = () => {
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
+  const navigate = useNavigate();
+
+  const handleServiceClick = (service) => {
+    const serviceRoutes = {
+      "Newspaper Ads": "/services/newspaper-advertising",
+      "Digital Marketing": "/services/digital-marketing",
+      "Social Media": "/services/digital-marketing",
+      "Radio Ads": "/services/radio-advertising",
+      "TV Commercials": "/services/tv-advertising",
+      "Outdoor Advertising": "/services/outdoor-dooh"
+    };
+    
+    if (serviceRoutes[service]) {
+      navigate(serviceRoutes[service]);
+    }
+  };
 
   const handleNewsletterSubmit = async (e) => {
     e.preventDefault();
@@ -48,34 +65,34 @@ const Footer = () => {
           <div className="footer-section">
             <h4>Top Services</h4>
             <ul>
-              <li><a href="#newspaper">Newspaper Ads</a></li>
-              <li><a href="#digital">Digital Marketing</a></li>
-              <li><a href="#social">Social Media</a></li>
-              <li><a href="#radio">Radio Ads</a></li>
-              <li><a href="#tv">TV Commercials</a></li>
-              <li><a href="#outdoor">Outdoor Advertising</a></li>
+              <li><span onClick={() => handleServiceClick("Newspaper Ads")} style={{ cursor: 'pointer', transition: 'color 0.3s ease' }} onMouseEnter={(e) => e.target.style.color = '#3b82f6'} onMouseLeave={(e) => e.target.style.color = 'rgba(255, 255, 255, 0.7)'}>Newspaper Ads</span></li>
+              <li><span onClick={() => handleServiceClick("Digital Marketing")} style={{ cursor: 'pointer', transition: 'color 0.3s ease' }} onMouseEnter={(e) => e.target.style.color = '#3b82f6'} onMouseLeave={(e) => e.target.style.color = 'rgba(255, 255, 255, 0.7)'}>Digital Marketing</span></li>
+              <li><span onClick={() => handleServiceClick("Social Media")} style={{ cursor: 'pointer', transition: 'color 0.3s ease' }} onMouseEnter={(e) => e.target.style.color = '#3b82f6'} onMouseLeave={(e) => e.target.style.color = 'rgba(255, 255, 255, 0.7)'}>Social Media</span></li>
+              <li><span onClick={() => handleServiceClick("Radio Ads")} style={{ cursor: 'pointer', transition: 'color 0.3s ease' }} onMouseEnter={(e) => e.target.style.color = '#3b82f6'} onMouseLeave={(e) => e.target.style.color = 'rgba(255, 255, 255, 0.7)'}>Radio Ads</span></li>
+              <li><span onClick={() => handleServiceClick("TV Commercials")} style={{ cursor: 'pointer', transition: 'color 0.3s ease' }} onMouseEnter={(e) => e.target.style.color = '#3b82f6'} onMouseLeave={(e) => e.target.style.color = 'rgba(255, 255, 255, 0.7)'}>TV Commercials</span></li>
+              <li><span onClick={() => handleServiceClick("Outdoor Advertising")} style={{ cursor: 'pointer', transition: 'color 0.3s ease' }} onMouseEnter={(e) => e.target.style.color = '#3b82f6'} onMouseLeave={(e) => e.target.style.color = 'rgba(255, 255, 255, 0.7)'}>Outdoor Advertising</span></li>
             </ul>
           </div>
 
           <div className="footer-section">
             <h4>Company</h4>
             <ul>
-              <li><a href="#about">About Us</a></li>
-              <li><a href="#careers">Careers</a></li>
-              <li><a href="#case-studies">Case Studies</a></li>
-              <li><a href="#blog">Blog</a></li>
-              <li><a href="#contact">Contact Us</a></li>
+              <li><span onClick={() => navigate('/about-us')} style={{ cursor: 'pointer', transition: 'color 0.3s ease' }} onMouseEnter={(e) => e.target.style.color = '#3b82f6'} onMouseLeave={(e) => e.target.style.color = 'rgba(255, 255, 255, 0.7)'}>About Us</span></li>
+              <li><span onClick={() => navigate('/careers')} style={{ cursor: 'pointer', transition: 'color 0.3s ease' }} onMouseEnter={(e) => e.target.style.color = '#3b82f6'} onMouseLeave={(e) => e.target.style.color = 'rgba(255, 255, 255, 0.7)'}>Careers</span></li>
+              <li><span onClick={() => navigate('/case-studies')} style={{ cursor: 'pointer', transition: 'color 0.3s ease' }} onMouseEnter={(e) => e.target.style.color = '#3b82f6'} onMouseLeave={(e) => e.target.style.color = 'rgba(255, 255, 255, 0.7)'}>Case Studies</span></li>
+              <li><span onClick={() => navigate('/blog')} style={{ cursor: 'pointer', transition: 'color 0.3s ease' }} onMouseEnter={(e) => e.target.style.color = '#3b82f6'} onMouseLeave={(e) => e.target.style.color = 'rgba(255, 255, 255, 0.7)'}>Blog</span></li>
+              <li><span onClick={() => navigate('/contact-us')} style={{ cursor: 'pointer', transition: 'color 0.3s ease' }} onMouseEnter={(e) => e.target.style.color = '#3b82f6'} onMouseLeave={(e) => e.target.style.color = 'rgba(255, 255, 255, 0.7)'}>Contact Us</span></li>
             </ul>
           </div>
 
           <div className="footer-section">
             <h4>Support</h4>
             <ul>
-              <li><a href="#help">Help Center</a></li>
-              <li><a href="#faq">FAQ</a></li>
-              <li><a href="#pricing">Pricing</a></li>
-              <li><a href="#terms">Terms of Service</a></li>
-              <li><a href="#privacy">Privacy Policy</a></li>
+              <li><span onClick={() => navigate('/help-center')} style={{ cursor: 'pointer', transition: 'color 0.3s ease' }} onMouseEnter={(e) => e.target.style.color = '#3b82f6'} onMouseLeave={(e) => e.target.style.color = 'rgba(255, 255, 255, 0.7)'}>Help Center</span></li>
+              <li><span onClick={() => navigate('/faq')} style={{ cursor: 'pointer', transition: 'color 0.3s ease' }} onMouseEnter={(e) => e.target.style.color = '#3b82f6'} onMouseLeave={(e) => e.target.style.color = 'rgba(255, 255, 255, 0.7)'}>FAQ</span></li>
+              <li><span onClick={() => navigate('/pricing')} style={{ cursor: 'pointer', transition: 'color 0.3s ease' }} onMouseEnter={(e) => e.target.style.color = '#3b82f6'} onMouseLeave={(e) => e.target.style.color = 'rgba(255, 255, 255, 0.7)'}>Pricing</span></li>
+              <li><span onClick={() => navigate('/terms-of-service')} style={{ cursor: 'pointer', transition: 'color 0.3s ease' }} onMouseEnter={(e) => e.target.style.color = '#3b82f6'} onMouseLeave={(e) => e.target.style.color = 'rgba(255, 255, 255, 0.7)'}>Terms of Service</span></li>
+              <li><span onClick={() => navigate('/privacy-policy')} style={{ cursor: 'pointer', transition: 'color 0.3s ease' }} onMouseEnter={(e) => e.target.style.color = '#3b82f6'} onMouseLeave={(e) => e.target.style.color = 'rgba(255, 255, 255, 0.7)'}>Privacy Policy</span></li>
             </ul>
           </div>
 

@@ -73,7 +73,29 @@ const Hero = ({ navigateToPage }) => {
     const service = allServices[actualIndex];
     
     if (service.page !== 'home') {
-      navigateToPage(service.page);
+      // Navigate directly to service page
+      const serviceRoutes = {
+        "newspaper-advertising": "/services/newspaper-advertising",
+        "cinema-advertising": "/services/cinema-advertising",
+        "tv-advertising": "/services/tv-advertising",
+        "lift-branding": "/services/lift-branding",
+        "hyperlocal-sms": "/services/hyperlocal-sms",
+        "ott-media": "/services/ott-media-buying",
+        "digital-marketing": "/services/digital-marketing",
+        "digital-pr": "/services/digital-pr",
+        "programmatic-ads": "/services/programmatic-ads",
+        "transit-media": "/services/transit-media",
+        "outdoor-dooh": "/services/outdoor-dooh",
+        "radio-advertising": "/services/radio-advertising",
+        "influencer-marketing": "/services/influencer-marketing",
+        "document-name-correction": "/services/document-name-correction",
+        "gazette-publication": "/services/gazette-publication"
+      };
+      
+      const route = serviceRoutes[service.page];
+      if (route) {
+        window.location.href = route;
+      }
     }
   };
 
@@ -134,8 +156,8 @@ const Hero = ({ navigateToPage }) => {
                 style={{
                   flex: "1",
                   padding: "15px 12px",
-                  background: (startIndex + index) === activeTab ? "white" : "#333",
-                  color: (startIndex + index) === activeTab ? "#333" : "white",
+                  background: (startIndex + index) === activeTab ? "#f0f8ff" : "#333",
+                  color: (startIndex + index) === activeTab ? "#2c5aa0" : "white",
                   textAlign: "center",
                   cursor: "pointer",
                   fontSize: "13px",
@@ -282,7 +304,7 @@ const Hero = ({ navigateToPage }) => {
                 </p>
 
                 <button 
-                  onClick={() => navigateToPage('newspaper-advertising')}
+                  onClick={() => window.location.href = '/services/newspaper-advertising'}
                   style={{
                     background: "#666",
                     color: "white",

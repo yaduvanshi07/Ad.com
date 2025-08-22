@@ -68,26 +68,27 @@ const Header = () => {
          fontFamily: "'Poppins', 'Montserrat', sans-serif",
          position: "relative"
        }}>
-        <div style={{
-          maxWidth: "1200px",
-          margin: "0 auto",
-          padding: "0 20px",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center"
-        }}>
-          {/* Logo */}
-          <div 
-            style={{ 
-              display: "flex", 
-              alignItems: "center",
-              cursor: "pointer",
-              gap: "15px"
-            }}
-            onClick={() => navigate('/')}
-            onMouseEnter={(e) => e.target.style.opacity = "0.8"}
-            onMouseLeave={(e) => e.target.style.opacity = "1"}
-          >
+                 <div style={{
+           maxWidth: "1400px",
+           margin: "0 auto",
+           padding: "0 40px",
+           display: "flex",
+           justifyContent: "space-between",
+           alignItems: "center"
+         }}>
+                     {/* Logo */}
+           <div 
+             style={{ 
+               display: "flex", 
+               alignItems: "center",
+               cursor: "pointer",
+               gap: "15px",
+               marginLeft: "0"
+             }}
+             onClick={() => navigate('/')}
+             onMouseEnter={(e) => e.target.style.opacity = "0.8"}
+             onMouseLeave={(e) => e.target.style.opacity = "1"}
+           >
                          {/* Company Logo - Completely transparent */}
              <div style={{
                width: "70px",
@@ -158,8 +159,8 @@ const Header = () => {
             </div>
           </div>
 
-          {/* Navigation Links */}
-          <div style={{ display: "flex", gap: "25px", fontSize: "17px", alignItems: "center" }}>
+                     {/* Navigation Links */}
+           <div style={{ display: "flex", gap: "30px", fontSize: "17px", alignItems: "center", marginLeft: "auto" }}>
             <div 
               style={{ 
                 cursor: "pointer", 
@@ -329,7 +330,15 @@ const Header = () => {
                 </div>
               )}
             </div>
-            <div style={{ cursor: "pointer", transition: "color 0.3s ease" }}>Blog</div>
+            <div 
+              style={{ cursor: "pointer", transition: "color 0.3s ease" }}
+              onClick={() => navigate('/blog')}
+              onMouseEnter={(e) => e.target.style.color = "#FFD700"}
+              onMouseLeave={(e) => e.target.style.color = "white"}
+            >
+              Blog
+            </div>
+            
             <div 
               style={{ 
                 cursor: "pointer", 
@@ -342,8 +351,22 @@ const Header = () => {
             >
               How to book
             </div>
-            <div style={{ cursor: "pointer", transition: "color 0.3s ease" }}>Login</div>
-            <div style={{ cursor: "pointer", transition: "color 0.3s ease" }}>🛒 Cart (0)</div>
+            <div 
+              style={{ cursor: "pointer", transition: "color 0.3s ease" }}
+              onClick={() => navigate('/login')}
+              onMouseEnter={(e) => e.target.style.color = "#FFD700"}
+              onMouseLeave={(e) => e.target.style.color = "white"}
+            >
+              Login
+            </div>
+            <div 
+              style={{ cursor: "pointer", transition: "color 0.3s ease" }}
+              onClick={() => navigate('/cart')}
+              onMouseEnter={(e) => e.target.style.color = "#FFD700"}
+              onMouseLeave={(e) => e.target.style.color = "white"}
+            >
+              🛒 Cart (0)
+            </div>
             <div style={{
               cursor: "pointer",
               backgroundColor: "#E53E3E",
@@ -352,10 +375,112 @@ const Header = () => {
               fontWeight: "bold",
               transition: "all 0.3s ease"
             }}
+            onClick={() => navigate('/contact-us')}
             onMouseOver={(e) => e.target.style.backgroundColor = "#cc3333"}
             onMouseOut={(e) => e.target.style.backgroundColor = "#E53E3E"}>
               Contact us
             </div>
+            
+                         {/* Three-dot Menu Button */}
+             <div style={{ 
+               position: "relative", 
+               cursor: "pointer",
+               transition: "color 0.3s ease",
+               fontSize: "20px",
+               fontWeight: "bold"
+             }}
+             onMouseEnter={(e) => e.target.style.color = "#FFD700"}
+             onMouseLeave={(e) => e.target.style.color = "white"}>
+               ⋯
+               <div style={{
+                 position: "absolute",
+                 top: "100%",
+                 right: "0",
+                 backgroundColor: "white",
+                 border: "1px solid #ddd",
+                 borderRadius: "8px",
+                 padding: "10px",
+                 minWidth: "150px",
+                 boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+                 display: "none",
+                 zIndex: 1000
+               }}
+               onMouseEnter={(e) => e.target.style.display = "block"}
+               onMouseLeave={(e) => e.target.style.display = "none"}>
+                 <div 
+                   style={{
+                     padding: "8px 12px",
+                     cursor: "pointer",
+                     borderRadius: "4px",
+                     transition: "background-color 0.2s ease"
+                   }}
+                   onClick={() => navigate('/about-us')}
+                   onMouseEnter={(e) => e.target.style.backgroundColor = "#f0f0f0"}
+                   onMouseLeave={(e) => e.target.style.backgroundColor = "transparent"}>
+                   About Us
+                 </div>
+                 <div 
+                   style={{
+                     padding: "8px 12px",
+                     cursor: "pointer",
+                     borderRadius: "4px",
+                     transition: "background-color 0.2s ease"
+                   }}
+                   onClick={() => navigate('/careers')}
+                   onMouseEnter={(e) => e.target.style.backgroundColor = "#f0f0f0"}
+                   onMouseLeave={(e) => e.target.style.backgroundColor = "transparent"}>
+                   Careers
+                 </div>
+                 <div 
+                   style={{
+                     padding: "8px 12px",
+                     cursor: "pointer",
+                     borderRadius: "4px",
+                     transition: "background-color 0.2s ease"
+                   }}
+                   onClick={() => navigate('/faq')}
+                   onMouseEnter={(e) => e.target.style.backgroundColor = "#f0f0f0"}
+                   onMouseLeave={(e) => e.target.style.backgroundColor = "transparent"}>
+                   FAQ
+                 </div>
+                 <div 
+                   style={{
+                     padding: "8px 12px",
+                     cursor: "pointer",
+                     borderRadius: "4px",
+                     transition: "background-color 0.2s ease"
+                   }}
+                   onClick={() => navigate('/help-center')}
+                   onMouseEnter={(e) => e.target.style.backgroundColor = "#f0f0f0"}
+                   onMouseLeave={(e) => e.target.style.backgroundColor = "transparent"}>
+                   Help Center
+                 </div>
+                 <div 
+                   style={{
+                     padding: "8px 12px",
+                     cursor: "pointer",
+                     borderRadius: "4px",
+                     transition: "background-color 0.2s ease"
+                   }}
+                   onClick={() => navigate('/terms-of-service')}
+                   onMouseEnter={(e) => e.target.style.backgroundColor = "#f0f0f0"}
+                   onMouseLeave={(e) => e.target.style.backgroundColor = "transparent"}>
+                   Terms of Service
+                 </div>
+                 <div 
+                   style={{
+                     padding: "8px 12px",
+                     cursor: "pointer",
+                     borderRadius: "4px",
+                     transition: "background-color 0.2s ease"
+                   }}
+                   onClick={() => navigate('/privacy-policy')}
+                   onMouseEnter={(e) => e.target.style.backgroundColor = "#f0f0f0"}
+                   onMouseLeave={(e) => e.target.style.backgroundColor = "transparent"}>
+                   Privacy Policy
+                 </div>
+               </div>
+             </div>
           </div>
         </div>
       </div>
