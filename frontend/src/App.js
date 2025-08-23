@@ -31,20 +31,26 @@ import TVAdvertising from './components/services/TraditionalMedia/TVAdvertising'
 import NewspaperAdvertising from './components/services/TraditionalMedia/NewspaperAdvertising';
 import LiftBranding from './components/services/TraditionalMedia/LiftBranding';
 import HyperlocalSMS from './components/services/TraditionalMedia/HyperlocalSMS';
+import DigitalPR from './components/services/Digital solutions/DigitalPR';
+import ProgrammaticAds from './components/services/Digital solutions/ProgrammaticAds';
+import TransitMedia from './components/services/Outdoor/TransitMedia';
+import RadioAdvertising from './components/services/Outdoor/RadioAdvertising';
+import InfluencerMarketing from './components/services/Outdoor/InfluencerMarketing';
+import OutdoorDOOH from './components/services/Outdoor/OutdoorDOOH';
 
 // Create placeholder components for services that don't exist yet
 // const NewspaperAdvertising = () => <ComingSoonPage service="Newspaper Advertising" />;
 // const LiftBranding = () => <ComingSoonPage service="Lift Branding" />;
 // const HyperlocalSMS = () => <ComingSoonPage service="Hyperlocal SMS" />;
 const OTTMediaBuying = () => <ComingSoonPage service="OTT/Media Buying" />;
-const DigitalPR = () => <ComingSoonPage service="Digital PR" />;
-const ProgrammaticAds = () => <ComingSoonPage service="Programmatic Ads" />;
+// const DigitalPR = () => <ComingSoonPage service="Digital PR" />;
+// const ProgrammaticAds = () => <ComingSoonPage service="Programmatic Ads" />;
 
 // Outdoor & Transit Components
-const TransitMedia = () => <ComingSoonPage service="Transit Media" />;
-const OutdoorDOOH = () => <ComingSoonPage service="Outdoor/DOOH" />;
-const RadioAdvertising = () => <ComingSoonPage service="Radio Advertising" />;
-const InfluencerMarketing = () => <ComingSoonPage service="Influencer Marketing" />;
+// const TransitMedia = () => <ComingSoonPage service="Transit Media" />;
+// const OutdoorDOOH = () => <ComingSoonPage service="Outdoor/DOOH" />;
+// const RadioAdvertising = () => <ComingSoonPage service="Radio Advertising" />;
+// const InfluencerMarketing = () => <ComingSoonPage service="Influencer Marketing" />;
 
 // Coming Soon Page Component
 const ComingSoonPage = ({ service }) => {
