@@ -1,14 +1,42 @@
+// STEP 1: Make sure this import is at the top of the file
+import { useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
+import { newspapers, cities, categories, searchFilters, utilityFunctions } from '../../../data/newspaperData';
+
+// (Keep the 'images' array definition here as it was)
+const images = [
+  'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80',
+  'https://images.unsplash.com/photo-1560185007-c5ca9d2c015d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+  'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+];
+
 
 const NewspaperAdvertising = () => {
-  // State management
+  // STEP 2: Call useNavigate() INSIDE the component
+  const navigate = useNavigate();
+
+  // State management (this was already correct)
   const [cities, setCities] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [newspapers, setNewspapers] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('Matrimonial');
   const [selectedCity, setSelectedCity] = useState('Mumbai');
+  const [selectedNewspaper, setSelectedNewspaper] = useState('The Times of India');
+  const [selectedDisplay, setSelectedDisplay] = useState('Display Classified');
   const [loading, setLoading] = useState(true);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  // Mock data for demonstration
+  // Slideshow effect (this was already correct)
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 3000); 
+
+    return () => clearInterval(timer);
+  }, []);
+
+
+  // Mock data for demonstration (this was already correct)
   useEffect(() => {
     const mockData = () => {
       setTimeout(() => {
@@ -27,6 +55,14 @@ const NewspaperAdvertising = () => {
           { id: 4, name: 'Education' },
           { id: 5, name: 'Business' }
         ]);
+
+        setNewspapers([
+          { id: 1, name: 'The Times of India' },
+          { id: 2, name: 'The Hindu' },
+          { id: 3, name: 'Hindustan Times' },
+          { id: 4, name: 'The Economic Times' },
+          { id: 5, name: 'Indian Express' }
+        ]);
         
         setLoading(false);
       }, 500);
@@ -37,6 +73,19 @@ const NewspaperAdvertising = () => {
 
   const handleSubmit = () => {
     alert(`Searching for ${selectedCategory} ads in ${selectedCity}`);
+  };
+
+  // STEP 3: REPLACE your old handleModifySearch function with this one.
+  // It is now inside the component and can access the state variables and the navigate function.
+  const handleModifySearch = () => {
+    navigate('/packages', { 
+      state: { 
+        category: selectedCategory, 
+        city: selectedCity,
+        newspaper: selectedNewspaper,
+        display: selectedDisplay
+      } 
+    });
   };
 
   if (loading) {
@@ -82,18 +131,18 @@ const NewspaperAdvertising = () => {
             Book Advertisements for Indian Newspapers Instantly!
           </h1>
           
-          {/* Ad Samples with Background Images */}
+          {/* Ad Samples with Background Images - 4 components */}
           <div style={{ 
-            display: 'flex', 
-            justifyContent: 'center',
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
             gap: '20px',
             marginBottom: '40px',
-            flexWrap: 'wrap'
+            justifyItems: 'center'
           }}>
             {/* Classified Text Ad */}
-            <div style={{ textAlign: 'center' }}>
+            <div style={{ textAlign: 'center', width: '100%', maxWidth: '320px' }}>
               <div style={{
-                width: '280px',
+                width: '100%',
                 height: '200px',
                 backgroundColor: 'white',
                 border: '2px solid #ccc',
@@ -133,26 +182,36 @@ const NewspaperAdvertising = () => {
                   <div style={{ fontSize: '11px', color: '#666' }}>Cast No Bar</div>
                 </div>
               </div>
-              <button style={{
-                backgroundColor: '#e53e3e',
-                color: 'white',
-                border: 'none',
-                padding: '12px 20px',
-                fontSize: '14px',
-                fontWeight: 'bold',
-                cursor: 'pointer',
-                width: '100%',
-                borderRadius: '5px',
-                transition: 'all 0.3s ease'
-              }}>
-                Book Classified Text Ad
-              </button>
+             
+              {/* Dropdown for component 1 */}
+              <div style={{ marginBottom: '10px' }}>
+                <select
+                  value={selectedCategory}
+                  onChange={(e) => setSelectedCategory(e.target.value)}
+                  style={{
+                    width: '100%',
+                    padding: '10px',
+                    border: '1px solid #ccc',
+                    fontSize: '14px',
+                    backgroundColor: 'white',
+                    borderRadius: '5px',
+                    color: '#999'
+                  }}
+                >
+                  <option value="">Matrimonial</option>
+                  {categories.map((category) => (
+                    <option key={category.id} value={category.name}>
+                      {category.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
 
             {/* Classified Display Ad */}
-            <div style={{ textAlign: 'center' }}>
+            <div style={{ textAlign: 'center', width: '100%', maxWidth: '320px' }}>
               <div style={{
-                width: '280px',
+                width: '100%',
                 height: '200px',
                 backgroundColor: 'white',
                 border: '2px solid #ccc',
@@ -204,26 +263,37 @@ const NewspaperAdvertising = () => {
                   </div>
                 </div>
               </div>
-              <button style={{
-                backgroundColor: '#e53e3e',
-                color: 'white',
-                border: 'none',
-                padding: '12px 20px',
-                fontSize: '14px',
-                fontWeight: 'bold',
-                cursor: 'pointer',
-                width: '100%',
-                borderRadius: '5px',
-                transition: 'all 0.3s ease'
-              }}>
-                Book Classified Display Ad
-              </button>
+            
+              
+              {/* Dropdown for component 2 */}
+              <div style={{ marginBottom: '10px' }}>
+                <select
+                  value={selectedCity}
+                  onChange={(e) => setSelectedCity(e.target.value)}
+                  style={{
+                    width: '100%',
+                    padding: '10px',
+                    border: '1px solid #ccc',
+                    fontSize: '14px',
+                    backgroundColor: 'white',
+                    borderRadius: '5px',
+                    color: '#999'
+                  }}
+                >
+                  <option value="">Mumbai, Delhi</option>
+                  {cities.map((city) => (
+                    <option key={city.id} value={city.name}>
+                      {city.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
 
             {/* Display Ad */}
-            <div style={{ textAlign: 'center' }}>
+            <div style={{ textAlign: 'center', width: '100%', maxWidth: '320px' }}>
               <div style={{
-                width: '280px',
+                width: '100%',
                 height: '200px',
                 backgroundColor: 'white',
                 border: '2px solid #ccc',
@@ -270,21 +340,106 @@ const NewspaperAdvertising = () => {
                   </div>
                 </div>
               </div>
-              <button style={{
-                backgroundColor: '#e53e3e',
+             
+              
+              {/* Dropdown for component 3 */}
+              <div style={{ marginBottom: '10px' }}>
+                <select
+                  value={selectedNewspaper}
+                  onChange={(e) => setSelectedNewspaper(e.target.value)}
+                  style={{
+                    width: '100%',
+                    padding: '10px',
+                    border: '1px solid #ccc',
+                    fontSize: '14px',
+                    backgroundColor: 'white',
+                    borderRadius: '5px',
+                    color: '#999'
+                  }}
+                >
+                  <option value="">The Times of India</option>
+                  {newspapers.map((newspaper) => (
+                    <option key={newspaper.id} value={newspaper.name}>
+                      {newspaper.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            {/* MODIFIED 4th Component - Premium Ad with Single Image Slideshow */}
+            <div style={{ textAlign: 'center', width: '100%', maxWidth: '320px' }}>
+              <div style={{
+                width: '100%',
+                height: '200px',
+                backgroundColor: 'white',
+                border: '2px solid #ccc',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginBottom: '15px',
+                borderRadius: '8px',
+                overflow: 'hidden',
+                position: 'relative'
+              }}>
+                <img 
+                  src={images[currentImageIndex]} 
+                  alt="Premium Service" 
+                  style={{ 
+                    width: '100%', 
+                    height: '100%', 
+                    objectFit: 'cover',
+                    transition: 'opacity 0.5s ease-in-out' // Smooth transition
+                  }}
+                />
+              </div>
+             
+              {/* Dropdown for component 4 */}
+              <div style={{ marginBottom: '10px' }}>
+                <select
+                  value={selectedDisplay}
+                  onChange={(e) => setSelectedDisplay(e.target.value)}
+                  style={{
+                    width: '100%',
+                    padding: '10px',
+                    border: '1px solid #ccc',
+                    fontSize: '14px',
+                    backgroundColor: 'white',
+                    borderRadius: '5px',
+                    color: '#999'
+                  }}
+                >
+                  
+                  <option value="Display Classified">Display Classified</option>
+                  <option value="Premium Display">Text Classified Ad</option>
+                  <option value="Banner Display">Display Ad</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          {/* Modify Search Button (similar to image 2) */}
+          <div style={{ 
+            display: 'flex', 
+            justifyContent: 'center',
+            marginBottom: '40px'
+          }}>
+            <button 
+              onClick={handleModifySearch}
+              style={{
+                backgroundColor: '#dc3545',
                 color: 'white',
                 border: 'none',
-                padding: '12px 20px',
-                fontSize: '14px',
+                padding: '15px 40px',
+                fontSize: '16px',
                 fontWeight: 'bold',
                 cursor: 'pointer',
-                width: '100%',
                 borderRadius: '5px',
-                transition: 'all 0.3s ease'
-              }}>
-                Book Display Ad
-              </button>
-            </div>
+                boxShadow: '0 2px 4px rgba(0,0,0,0.2)'
+              }}
+            >
+              Modify Search
+            </button>
           </div>
           
           {/* Stats */}

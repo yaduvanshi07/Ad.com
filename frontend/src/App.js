@@ -24,6 +24,10 @@ import TermsOfService from './pages/TermsOfService';
 import Pricing from './pages/Pricing';
 import HelpCenter from './pages/HelpCenter';
 
+// --- ONLY CHANGE 1 OF 2: IMPORT THE PACKAGES PAGE ---
+// I added this line. Please make sure the path is correct.
+import PackagesPage from './pages/PackagesPage'; 
+
 // Traditional Media Components - Import only existing files
 import CinemaAdvertising from './components/services/TraditionalMedia/CinemaAdvertising';
 import DigitalMarketing from './components/services/TraditionalMedia/DigitalMarketing';
@@ -378,6 +382,10 @@ const App = () => {
           <Route path="/services/lift-branding" element={<LiftBranding />} />
           <Route path="/services/hyperlocal-sms" element={<HyperlocalSMS />} />
           
+          {/* --- ONLY CHANGE 2 OF 2: ADD THE ROUTE FOR THE PACKAGES PAGE --- */}
+          {/* I added this line so the router knows what to render for "/packages" */}
+          <Route path="/packages" element={<PackagesPage />} />
+
           {/* Digital Solutions Services Routes */}
           <Route path="/services/ott-media-buying" element={<OTTMediaBuying />} />
           <Route path="/services/digital-marketing" element={<DigitalMarketing />} />
